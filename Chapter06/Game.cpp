@@ -23,6 +23,8 @@ Game::Game()
 	
 }
 
+
+
 bool Game::Initialize()
 {
 	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) != 0)
