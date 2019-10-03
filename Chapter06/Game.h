@@ -13,11 +13,13 @@
 #include <vector>
 #include "Math.h"
 
+
 class Game
 {
 public:
 	Game();
 	bool Initialize();
+    //ゲームループのメソッド
 	void RunLoop();
 	void Shutdown();
 
