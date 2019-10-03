@@ -10,7 +10,7 @@
 
 int main(int argc, char** argv)
 {
-	Game game;
+	Game game; //Gameクラスのポインタ的なあれ
 	bool success = game.Initialize();
 	if (success)
 	{
