@@ -13,7 +13,7 @@
 #include <vector>
 #include "Math.h"
 
-
+//Gameクラスのヘッダファイル　関数及びメンバ変数の宣言
 class Game
 {
 public:
