@@ -42,10 +42,12 @@ private:
 	class Renderer* mRenderer;
 
 	Uint32 mTicksCount;
-	bool mIsRunning;
+	volatile bool mIsRunning;
 	// Track if we're updating actors right now
 	bool mUpdatingActors;
 
 	// Game-specific code
 	class CameraActor* mCameraActor;
 };
+
+extern Game *_gameInstance;

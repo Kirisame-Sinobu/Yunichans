@@ -15,12 +15,14 @@
 #include "CameraActor.h"
 #include "PlaneActor.h"
 
+Game *_gameInstance = nullptr;
+
 Game::Game()
 :mRenderer(nullptr)
 ,mIsRunning(true)
 ,mUpdatingActors(false)
 {
-	
+    _gameInstance = this;
 }
 
 bool Game::Initialize()
@@ -52,8 +54,11 @@ void Game::RunLoop()
 {
 	while (mIsRunning)
 	{
+        //シャットダウン判定
 		ProcessInput();
+        //ゲームアップデート
 		UpdateGame();
+        //レンダーラー　画面表示
 		GenerateOutput();
 	}
 }
@@ -65,6 +70,7 @@ void Game::ProcessInput()
 	{
 		switch (event.type)
 		{
+                //シャットダウン
 			case SDL_QUIT:
 				mIsRunning = false;
 				break;
@@ -87,18 +93,22 @@ void Game::UpdateGame()
 {
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
-		;
-
+    //経過時間まで待つ
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16));
+    
+    //経過時間ゲット
 	float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
+    //処理が重くなり時間が経ち過ぎを防ぐ
 	if (deltaTime > 0.05f)
 	{
 		deltaTime = 0.05f;
 	}
+    //前フレームの時間をとる
 	mTicksCount = SDL_GetTicks();
 
 	// Update all actors
 	mUpdatingActors = true;
+    //全てのアクターのアップデートの処理
 	for (auto actor : mActors)
 	{
 		actor->Update(deltaTime);
@@ -106,6 +116,7 @@ void Game::UpdateGame()
 	mUpdatingActors = false;
 
 	// Move any pending actors to mActors
+    //追加されたオブジェクトの処理　その後アクターのリストに追加
 	for (auto pending : mPendingActors)
 	{
 		pending->ComputeWorldTransform();
@@ -114,9 +125,11 @@ void Game::UpdateGame()
 	mPendingActors.clear();
 
 	// Add any dead actors to a temp vector
+    //消すオブジェクトの処理
 	std::vector<Actor*> deadActors;
 	for (auto actor : mActors)
 	{
+        //各オブジェクトの状態を取る
 		if (actor->GetState() == Actor::EDead)
 		{
 			deadActors.emplace_back(actor);
@@ -124,6 +137,7 @@ void Game::UpdateGame()
 	}
 
 	// Delete dead actors (which removes them from mActors)
+    //オブジェクトを消す
 	for (auto actor : deadActors)
 	{
 		delete actor;
@@ -138,55 +152,70 @@ void Game::GenerateOutput()
 void Game::LoadData()
 {
 	// Create actors
-	Actor* a = new Actor(this);
+    //キューブのオブジェクト制作
+	Actor* a = new Actor();
 	a->SetPosition(Vector3(200.0f, 75.0f, 0.0f));
 	a->SetScale(100.0f);
 	Quaternion q(Vector3::UnitY, -Math::PiOver2);
-	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
+	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
 	a->SetRotation(q);
 	MeshComponent* mc = new MeshComponent(a);
 	mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
+    
+//    for(int i = 0; i < 10; i++){
+//        for(int j = 0; j < 10; j ++){
+//            Actor* a = new Actor();
+//            a->SetPosition(Vector3(200.0f*j, 75.0f*i, 100.0f));
+//            a->SetScale(100.0f);
+//            Quaternion q(Vector3::UnitY, -Math::PiOver2);
+//            q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
+//            a->SetRotation(q);
+//            MeshComponent* mc = new MeshComponent(a);
+//            mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
+//        }
+//    }
 
-	a = new Actor(this);
+    //ボールのオブジェクト制作
+	a = new Actor();
 	a->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
 	a->SetScale(3.0f);
 	mc = new MeshComponent(a);
 	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
 
-	// Setup floor
+	// Setup floor 床の作成
 	const float start = -1250.0f;
 	const float size = 250.0f;
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			a = new PlaneActor(this);
+			a = new PlaneActor();
 			a->SetPosition(Vector3(start + i * size, start + j * size, -100.0f));
 		}
 	}
 
-	// Left/right walls
+	// Left/right walls 左右の壁制作
 	q = Quaternion(Vector3::UnitX, Math::PiOver2);
 	for (int i = 0; i < 10; i++)
 	{
-		a = new PlaneActor(this);
+		a = new PlaneActor();
 		a->SetPosition(Vector3(start + i * size, start - size, 0.0f));
 		a->SetRotation(q);
 		
-		a = new PlaneActor(this);
+		a = new PlaneActor();
 		a->SetPosition(Vector3(start + i * size, -start + size, 0.0f));
 		a->SetRotation(q);
 	}
 
 	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
-	// Forward/back walls
+	// Forward/back walls 上下の壁作成
 	for (int i = 0; i < 10; i++)
 	{
-		a = new PlaneActor(this);
+		a = new PlaneActor();
 		a->SetPosition(Vector3(start - size, start + i * size, 0.0f));
 		a->SetRotation(q);
 
-		a = new PlaneActor(this);
+		a = new PlaneActor();
 		a->SetPosition(Vector3(-start + size, start + i * size, 0.0f));
 		a->SetRotation(q);
 	}
@@ -199,19 +228,19 @@ void Game::LoadData()
 	dir.mSpecColor = Vector3(0.8f, 0.8f, 0.8f);
 
 	// Camera actor
-	mCameraActor = new CameraActor(this);
+	mCameraActor = new CameraActor();
 
-	// UI elements
-	a = new Actor(this);
-	a->SetPosition(Vector3(-350.0f, -350.0f, 0.0f));
-	SpriteComponent* sc = new SpriteComponent(a);
-	sc->SetTexture(mRenderer->GetTexture("Assets/HealthBar.png"));
-
-	a = new Actor(this);
-	a->SetPosition(Vector3(375.0f, -275.0f, 0.0f));
-	a->SetScale(0.75f);
-	sc = new SpriteComponent(a);
-	sc->SetTexture(mRenderer->GetTexture("Assets/Radar.png"));
+//	// UI elements
+//	a = new Actor(this);
+//	a->SetPosition(Vector3(-350.0f, -350.0f, 0.0f));
+//	SpriteComponent* sc = new SpriteComponent(a);
+//	sc->SetTexture(mRenderer->GetTexture("Assets/HealthBar.png"));
+//
+//	a = new Actor(this);
+//	a->SetPosition(Vector3(375.0f, -275.0f, 0.0f));
+//	a->SetScale(0.75f);
+//	sc = new SpriteComponent(a);
+//	sc->SetTexture(mRenderer->GetTexture("Assets/Radar.png"));
 }
 
 void Game::UnloadData()

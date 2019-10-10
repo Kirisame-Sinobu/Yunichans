@@ -12,19 +12,27 @@
 #include <memory.h>
 #include <limits>
 
+#pragma mark - 数学関数
+
 namespace Math
 {
+    ///<summary> π </summary>
+    ///π
 	const float Pi = 3.1415926535f;
+    ///2π
 	const float TwoPi = Pi * 2.0f;
+    ///1/2π
 	const float PiOver2 = Pi / 2.0f;
+    ///無限
 	const float Infinity = std::numeric_limits<float>::infinity();
+    ///マイナス無限
 	const float NegInfinity = -std::numeric_limits<float>::infinity();
-
+    ///角度からπ取得
 	inline float ToRadians(float degrees)
 	{
 		return degrees * Pi / 180.0f;
 	}
-
+    ///
 	inline float ToDegrees(float radians)
 	{
 		return radians * 180.0f / Pi;
@@ -110,6 +118,8 @@ namespace Math
 		return fmod(numer, denom);
 	}
 }
+
+#pragma mark - Vector系
 
 // 2D Vector
 class Vector2

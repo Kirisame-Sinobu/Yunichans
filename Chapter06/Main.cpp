@@ -11,6 +11,7 @@
 int main(int argc, char** argv)
 {
 	Game game; //Gameクラスのポインタ的なあれ
+    //初期化
 	bool success = game.Initialize();
 	if (success)
 	{

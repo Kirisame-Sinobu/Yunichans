@@ -11,10 +11,10 @@
 #include "Renderer.h"
 #include "MeshComponent.h"
 
-PlaneActor::PlaneActor(Game* game)
-	:Actor(game)
+PlaneActor::PlaneActor()
+	:Actor()
 {
 	SetScale(10.0f);
 	MeshComponent* mc = new MeshComponent(this);
-	mc->SetMesh(GetGame()->GetRenderer()->GetMesh("Assets/Plane.gpmesh"));
+	mc->SetMesh(_gameInstance->GetRenderer()->GetMesh("Assets/Plane.gpmesh"));
 }

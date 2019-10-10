@@ -20,12 +20,12 @@ SpriteComponent::SpriteComponent(Actor* owner, int drawOrder)
 	,mTexWidth(0)
 	,mTexHeight(0)
 {
-	mOwner->GetGame()->GetRenderer()->AddSprite(this);
+	_gameInstance->GetRenderer()->AddSprite(this);
 }
 
 SpriteComponent::~SpriteComponent()
 {
-	mOwner->GetGame()->GetRenderer()->RemoveSprite(this);
+	_gameInstance->GetRenderer()->RemoveSprite(this);
 }
 
 void SpriteComponent::Draw(Shader* shader)
