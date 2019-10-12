@@ -11,20 +11,22 @@
 #include "Component.h"
 #include <algorithm>
 
-Actor::Actor(Game* game)
+Actor::Actor()
 	:mState(EActive)
 	,mPosition(Vector3::Zero)
 	,mRotation(Quaternion::Identity)
 	,mScale(1.0f)
-	,mGame(game)
+//	,mGame(_gameInstance)
 	,mRecomputeWorldTransform(true)
 {
-	mGame->AddActor(this);
+    _gameInstance->AddActor(this);
+//    mGame->AddActor(this);
 }
 
 Actor::~Actor()
 {
-	mGame->RemoveActor(this);
+    _gameInstance->RemoveActor(this);
+//	mGame->RemoveActor(this);
 	// Need to delete components
 	// Because ~Component calls RemoveComponent, need a different style loop
 	while (!mComponents.empty())

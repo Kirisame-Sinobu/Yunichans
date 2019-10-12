@@ -12,8 +12,8 @@
 #include "Renderer.h"
 #include "Game.h"
 
-CameraActor::CameraActor(Game* game)
-	:Actor(game)
+CameraActor::CameraActor()
+	:Actor()
 {
 	mMoveComp = new MoveComponent(this);
 }
@@ -28,7 +28,7 @@ void CameraActor::UpdateActor(float deltaTime)
 	Vector3 up = Vector3::UnitZ;
 
 	Matrix4 view = Matrix4::CreateLookAt(cameraPos, target, up);
-	GetGame()->GetRenderer()->SetViewMatrix(view);
+	_gameInstance->GetRenderer()->SetViewMatrix(view);
 }
 
 void CameraActor::ActorInput(const uint8_t* keys)
