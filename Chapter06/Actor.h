@@ -25,10 +25,13 @@ public:
 	virtual ~Actor();
 
 	// Update function called from Game (not overridable)
+    //アップデート部分　Gameから呼ばれる　オーバーライド不可
 	void Update(float deltaTime);
 	// Updates all the components attached to the actor (not overridable)
+    //全コンポーネントのアップデート　オーバーライド不可
 	void UpdateComponents(float deltaTime);
 	// Any actor-specific update code (overridable)
+    //アクター固有のアップデート　オーバーライド可
 	virtual void UpdateActor(float deltaTime);
 
 	// ProcessInput function called from Game (not overridable)
@@ -62,13 +65,15 @@ private:
 	// Actor's state
 	State mState;
 
-	// Transform
+	// Transform　Math.hからの参照
 	Matrix4 mWorldTransform;
 	Vector3 mPosition;
 	Quaternion mRotation;
+
 	float mScale;
 	bool mRecomputeWorldTransform;
 
 	std::vector<class Component*> mComponents;
+    //ゲームクラスへのポインタ
 	class Game* mGame;
 };
