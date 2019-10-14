@@ -6,9 +6,19 @@
 //  Copyright © 2019 Sanjay Madhav. All rights reserved.
 //
 
-#ifndef Ball_hpp
-#define Ball_hpp
+#pragma once
+#include "Actor.h"
 
-#include <stdio.h>
 
-#endif /* Ball_hpp */
+class Ball : public Actor
+{
+public:
+    Ball();
+
+    void UpdateActor(float deltaTime) override;
+    void ActorInput(const uint8_t* keyState) override;
+private:
+    class MeshComponent *mMeshComp;
+    class MoveComponent *mMoveComp;
+    
+};

@@ -14,15 +14,19 @@
 #include "MeshComponent.h"
 #include "CameraActor.h"
 #include "PlaneActor.h"
+#include "Block.hpp"
+#include "Ball.hpp"
 
 Game *_gameInstance = nullptr;
+Renderer *_rendererInstance = nullptr;
 
-Game::Game()
-:mRenderer(nullptr)
+Game::Game():
+mRenderer(nullptr)
 ,mIsRunning(true)
 ,mUpdatingActors(false)
 {
     _gameInstance = this;
+//    _rendererInstance = new Renderer(this);
 }
 
 
@@ -37,6 +41,7 @@ bool Game::Initialize()
 
 	// Create the renderer
 	mRenderer = new Renderer(this);
+//    _rendererInstance = new Renderer(this);
 	if (!mRenderer->Initialize(1024.0f, 768.0f))
 	{
 		SDL_Log("Failed to initialize renderer");
@@ -154,15 +159,24 @@ void Game::GenerateOutput()
 void Game::LoadData()
 {
 	// Create actors
-    //キューブのオブジェクト制作
-	Actor* a = new Actor();
-	a->SetPosition(Vector3(200.0f, 75.0f, 0.0f));
-	a->SetScale(100.0f);
-	Quaternion q(Vector3::UnitY, -Math::PiOver2);
-	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
-	a->SetRotation(q);
-	MeshComponent* mc = new MeshComponent(a);
-	mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
+//    //キューブのオブジェクト制作
+    
+    MeshComponent* mc;
+    for(int i = 0; i < 10; i++){
+        for(int j = 0; j < 10; j++){
+            Block* block = new Block();
+            block->SetPosition(Vector3(101.0f * i, 101.0f * j, 100.0f));
+            block->SetScale(100.0f);
+            Quaternion q(Vector3::UnitY, -Math::Pi);
+            q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
+            block->SetRotation(q);
+//            mc = new MeshComponent(block);
+//            mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
+        }
+    }
+    
+    
+
     
 //    for(int i = 0; i < 10; i++){
 //        for(int j = 0; j < 10; j ++){
@@ -178,52 +192,55 @@ void Game::LoadData()
 //    }
 
     //ボールのオブジェクト制作
-	a = new Actor();
-	a->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
-	a->SetScale(3.0f);
-	mc = new MeshComponent(a);
+	Ball* ball = new Ball();
+	ball->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
+	ball->SetScale(3.0f);
+    Quaternion q(Vector3::UnitY, -Math::PiOver2);
+    q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
+    ball->SetRotation(q);
+    mc = new MeshComponent(ball);
 	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
-
-	// Setup floor 床の作成
-	const float start = -1250.0f;
-	const float size = 250.0f;
-	for (int i = 0; i < 10; i++)
-	{
-		for (int j = 0; j < 10; j++)
-		{
-			a = new PlaneActor();
-			a->SetPosition(Vector3(start + i * size, start + j * size, -100.0f));
-		}
-	}
+//
+//	// Setup floor 床の作成
+//	const float start = -1250.0f;
+//	const float size = 250.0f;
+//	for (int i = 0; i < 10; i++)
+//	{
+//		for (int j = 0; j < 10; j++)
+//		{
+//			a = new PlaneActor();
+//			a->SetPosition(Vector3(start + i * size, start + j * size, -100.0f));
+//		}
+//	}
 
 	// Left/right walls 左右の壁制作
-	q = Quaternion(Vector3::UnitX, Math::PiOver2);
-	for (int i = 0; i < 10; i++)
-	{
-		a = new PlaneActor();
-		a->SetPosition(Vector3(start + i * size, start - size, 0.0f));
-		a->SetRotation(q);
-		
-		a = new PlaneActor();
-		a->SetPosition(Vector3(start + i * size, -start + size, 0.0f));
-		a->SetRotation(q);
-	}
-
-	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
-	// Forward/back walls 上下の壁作成
-	for (int i = 0; i < 10; i++)
-	{
-		a = new PlaneActor();
-		a->SetPosition(Vector3(start - size, start + i * size, 0.0f));
-		a->SetRotation(q);
-
-		a = new PlaneActor();
-		a->SetPosition(Vector3(-start + size, start + i * size, 0.0f));
-		a->SetRotation(q);
-	}
+//	q = Quaternion(Vector3::UnitX, Math::PiOver2);
+//	for (int i = 0; i < 10; i++)
+//	{
+//		a = new PlaneActor();
+//		a->SetPosition(Vector3(start + i * size, start - size, 0.0f));
+//		a->SetRotation(q);
+//
+//		a = new PlaneActor();
+//		a->SetPosition(Vector3(start + i * size, -start + size, 0.0f));
+//		a->SetRotation(q);
+//	}
+//
+//	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
+//	// Forward/back walls 上下の壁作成
+//	for (int i = 0; i < 10; i++)
+//	{
+//		a = new PlaneActor();
+//		a->SetPosition(Vector3(start - size, start + i * size, 0.0f));
+//		a->SetRotation(q);
+//
+//		a = new PlaneActor();
+//		a->SetPosition(Vector3(-start + size, start + i * size, 0.0f));
+//		a->SetRotation(q);
+//	}
 
 	// Setup lights
-	mRenderer->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
+	mRenderer->SetAmbientLight(Vector3(1.2f, 1.2f, 1.2f));
 	DirectionalLight& dir = mRenderer->GetDirectionalLight();
 	dir.mDirection = Vector3(0.0f, -0.707f, -0.707f);
 	dir.mDiffuseColor = Vector3(0.78f, 0.88f, 1.0f);

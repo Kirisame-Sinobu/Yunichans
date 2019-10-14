@@ -6,9 +6,17 @@
 //  Copyright © 2019 Sanjay Madhav. All rights reserved.
 //
 
-#ifndef Block_hpp
-#define Block_hpp
+#pragma once
+#include "Actor.h"
 
-#include <stdio.h>
 
-#endif /* Block_hpp */
+class Block : public Actor
+{
+public:
+    Block();
+
+    void UpdateActor(float deltaTime) override;
+    void ActorInput(const uint8_t* keyState) override;
+private:
+    class MeshComponent* mMeshComp;
+};

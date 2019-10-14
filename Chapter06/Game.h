@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include "Math.h"
+//#include "Renderer.h"
 
 //Gameクラスのヘッダファイル　関数及びメンバ変数の宣言
 class Game
@@ -51,3 +52,4 @@ private:
 };
 
 extern Game *_gameInstance;
+//extern Renderer *_rendererInstance;

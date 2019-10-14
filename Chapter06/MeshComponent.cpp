@@ -20,12 +20,12 @@ MeshComponent::MeshComponent(Actor* owner)
 	,mMesh(nullptr)
 	,mTextureIndex(0)
 {
-    _gameInstance->GetRenderer()->AddMeshComp(this);
+    _gameInstance -> GetRenderer() ->AddMeshComp(this);
 }
 
 MeshComponent::~MeshComponent()
 {
-	_gameInstance->GetRenderer()->RemoveMeshComp(this);
+	_gameInstance -> GetRenderer() ->RemoveMeshComp(this);
 }
 
 void MeshComponent::Draw(Shader* shader)
