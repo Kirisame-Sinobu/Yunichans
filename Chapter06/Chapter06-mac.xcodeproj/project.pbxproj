@@ -27,6 +27,7 @@
 		92E46E941B6353E50035CD21 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E46E931B6353E50035CD21 /* OpenGL.framework */; };
 		F4438EB0235433A4006A6EF0 /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4438EAE235433A4006A6EF0 /* Block.cpp */; };
 		F4438EB323543AE8006A6EF0 /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4438EB123543AE8006A6EF0 /* Ball.cpp */; };
+		F4438EB92354627A006A6EF0 /* MoveBallComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4438EB72354627A006A6EF0 /* MoveBallComponent.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,8 @@
 		F4438EAF235433A4006A6EF0 /* Block.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Block.hpp; sourceTree = "<group>"; };
 		F4438EB123543AE8006A6EF0 /* Ball.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ball.cpp; sourceTree = "<group>"; };
 		F4438EB223543AE8006A6EF0 /* Ball.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
+		F4438EB72354627A006A6EF0 /* MoveBallComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MoveBallComponent.cpp; sourceTree = "<group>"; };
+		F4438EB82354627A006A6EF0 /* MoveBallComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MoveBallComponent.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,16 +93,11 @@
 				F4438EB423543AF8006A6EF0 /* System */,
 				F4438EB523543B51006A6EF0 /* Camera */,
 				F4438EB623543B83006A6EF0 /* GameObj */,
-				9223C46F1F009428009A94D7 /* Component.h */,
-				9223C46E1F009428009A94D7 /* Component.cpp */,
+				F4438EBA23546289006A6EF0 /* Component */,
 				9223C4911F0CA766009A94D7 /* CircleComponent.cpp */,
 				9223C4931F0CA766009A94D7 /* CircleComponent.h */,
-				9223C4671F009428009A94D7 /* Game.cpp */,
-				9223C4701F009428009A94D7 /* Game.h */,
 				92CF0D6C1F3BBBE50086A0F3 /* MeshComponent.cpp */,
 				92CF0D6D1F3BBBE50086A0F3 /* MeshComponent.h */,
-				9223C48A1F0CA3CE009A94D7 /* MoveComponent.cpp */,
-				9223C48C1F0CA3D4009A94D7 /* MoveComponent.h */,
 				92CF0D6E1F3BBBE50086A0F3 /* PlaneActor.cpp */,
 				92CF0D6F1F3BBBE50086A0F3 /* PlaneActor.h */,
 				92CF0D701F3BBBE50086A0F3 /* Renderer.cpp */,
@@ -130,6 +128,8 @@
 		F4438EB423543AF8006A6EF0 /* System */ = {
 			isa = PBXGroup;
 			children = (
+				9223C4671F009428009A94D7 /* Game.cpp */,
+				9223C4701F009428009A94D7 /* Game.h */,
 				92CF0D6A1F3BBBE50086A0F3 /* Mesh.cpp */,
 				92CF0D6B1F3BBBE50086A0F3 /* Mesh.h */,
 				9223C4721F009428009A94D7 /* Math.cpp */,
@@ -137,6 +137,8 @@
 				9223C4711F009428009A94D7 /* Main.cpp */,
 				9223C4691F009428009A94D7 /* Actor.h */,
 				9223C4681F009428009A94D7 /* Actor.cpp */,
+				9223C46E1F009428009A94D7 /* Component.cpp */,
+				9223C46F1F009428009A94D7 /* Component.h */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -159,6 +161,17 @@
 				F4438EB223543AE8006A6EF0 /* Ball.hpp */,
 			);
 			name = GameObj;
+			sourceTree = "<group>";
+		};
+		F4438EBA23546289006A6EF0 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				F4438EB72354627A006A6EF0 /* MoveBallComponent.cpp */,
+				F4438EB82354627A006A6EF0 /* MoveBallComponent.hpp */,
+				9223C48A1F0CA3CE009A94D7 /* MoveComponent.cpp */,
+				9223C48C1F0CA3D4009A94D7 /* MoveComponent.h */,
+			);
+			name = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +264,7 @@
 				92CF0D731F3BBBE50086A0F3 /* Mesh.cpp in Sources */,
 				9223C4951F0CA766009A94D7 /* CircleComponent.cpp in Sources */,
 				9223C47C1F009428009A94D7 /* Component.cpp in Sources */,
+				F4438EB92354627A006A6EF0 /* MoveBallComponent.cpp in Sources */,
 				9206FDC61F140707005078A2 /* Texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,7 +15,7 @@
 CameraActor::CameraActor()
 	:Actor()
 {
-	mMoveComp = new MoveComponent(this);
+//	mMoveComp = new MoveComponent(this);
 }
 
 void CameraActor::UpdateActor(float deltaTime)
