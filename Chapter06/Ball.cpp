@@ -17,7 +17,7 @@ Ball::Ball()
 {
     mMoveComp = new MoveComponent(this);
     mMeshComp = new MeshComponent(this);
-    mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Cube.gpmesh"));
+    mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Sphere.gpmesh"));
 }
 
 void Ball::UpdateActor(float deltaTime)

@@ -161,7 +161,7 @@ void Game::LoadData()
 	// Create actors
     //キューブのオブジェクト制作
     
-    MeshComponent* mc;
+//    MeshComponent* mc;
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             Block* block = new Block();
@@ -198,8 +198,8 @@ void Game::LoadData()
     Quaternion q(Vector3::UnitY, -Math::PiOver2);
     q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
     ball->SetRotation(q);
-    mc = new MeshComponent(ball);
-	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
+//    mc = new MeshComponent(ball);
+//	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
 //
 //	// Setup floor 床の作成
 //	const float start = -1250.0f;
@@ -243,11 +243,11 @@ void Game::LoadData()
 //	}
 //
 //	// Setup lights
-//	mRenderer->SetAmbientLight(Vector3(1.2f, 1.2f, 1.2f));
-//	DirectionalLight& dir = mRenderer->GetDirectionalLight();
-//	dir.mDirection = Vector3(0.0f, -0.707f, -0.707f);
-//	dir.mDiffuseColor = Vector3(0.78f, 0.88f, 1.0f);
-//	dir.mSpecColor = Vector3(0.8f, 0.8f, 0.8f);
+	mRenderer->SetAmbientLight(Vector3(1.2f, 1.2f, 1.2f));
+	DirectionalLight& dir = mRenderer->GetDirectionalLight();
+	dir.mDirection = Vector3(0.0f, -0.707f, -0.707f);
+	dir.mDiffuseColor = Vector3(0.78f, 0.88f, 1.0f);
+	dir.mSpecColor = Vector3(0.8f, 0.8f, 0.8f);
 //
 //	// Camera actor
 //	mCameraActor = new CameraActor();
