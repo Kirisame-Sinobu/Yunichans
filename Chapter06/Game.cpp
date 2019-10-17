@@ -160,24 +160,41 @@ void Game::LoadData()
 {
 	// Create actors
     //キューブのオブジェクト制作
+        MeshComponent* mc;
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; j++){
+                Block* block = new Block();
+                block->SetPosition(Vector3(101.0f * i, 101.0f * j, 100.0f));
+                block->SetScale(100.0f);
+                Quaternion q(Vector3::UnitY, -Math::Pi);
+                q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
+                block->SetRotation(q);
+                SpriteComponent* _sc = new SpriteComponent(block);
+                _sc->SetTexture(mRenderer->GetTexture("Assets/Cube.png"));
+    
+    
+    //            mc = new MeshComponent(block);
+    //            mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
+            }
+        }
     
 //    MeshComponent* mc;
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 10; j++){
-            Block* block = new Block();
-            block->SetPosition(Vector3(101.0f * i, 101.0f * j, 100.0f));
-            block->SetScale(100.0f);
-            Quaternion q(Vector3::UnitY, -Math::Pi);
-            q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
-            block->SetRotation(q);
-//            SpriteComponent* _sc = new SpriteComponent(block);
-//            _sc->SetTexture(mRenderer->GetTexture("Assets/Cube.png"));
-            
-            
-//            mc = new MeshComponent(block);
-//            mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
-        }
-    }
+//    for(int i = 0; i < 10; i++){
+//        for(int j = 0; j < 10; j++){
+//            Block* block = new Block();
+//            block->SetPosition(Vector3(101.0f * i, 101.0f * j, 100.0f));
+//            block->SetScale(100.0f);
+//            Quaternion q(Vector3::UnitY, -Math::Pi);
+//            q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
+//            block->SetRotation(q);
+////            SpriteComponent* _sc = new SpriteComponent(block);
+////            _sc->SetTexture(mRenderer->GetTexture("Assets/Cube.png"));
+//            
+//            
+////            mc = new MeshComponent(block);
+////            mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
+//        }
+//    }
     
     
 
