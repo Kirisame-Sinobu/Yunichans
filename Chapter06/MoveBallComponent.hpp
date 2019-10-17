@@ -9,6 +9,7 @@
 #pragma once
 #include "Component.h"
 
+
 class MoveBallComponent : public Component
 {
 public:
@@ -23,4 +24,6 @@ public:
 private:
     float mAngularSpeed;
     float mForwardSpeed;
+    
+    Vector3 mSpeed;
 };

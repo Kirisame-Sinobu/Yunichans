@@ -19,6 +19,6 @@ public:
     void ActorInput(const uint8_t* keyState) override;
 private:
     class MeshComponent *mMeshComp;
-    class MoveComponent *mMoveComp;
+    class MoveBallComponent *mMoveBallComp;
     
 };
