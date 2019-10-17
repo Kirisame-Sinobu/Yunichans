@@ -13,7 +13,7 @@ class MoveBallComponent : public Component
 {
 public:
     // Lower update order to update first
-    MoveComponent(class Actor* owner, int updateOrder = 10);
+    MoveBallComponent(class Actor* owner, int updateOrder = 10);
     void Update(float deltaTime) override;
     
     float GetAngularSpeed() const { return mAngularSpeed; }

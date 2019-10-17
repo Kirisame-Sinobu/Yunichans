@@ -11,11 +11,12 @@
 #include "SDL/SDL_scancode.h"
 #include "Renderer.h"
 #include "Game.h"
+#include <stdio.h>
 
 CameraActor::CameraActor()
 	:Actor()
 {
-//	mMoveComp = new MoveComponent(this);
+	mMoveComp = new MoveComponent(this);
 }
 
 void CameraActor::UpdateActor(float deltaTime)

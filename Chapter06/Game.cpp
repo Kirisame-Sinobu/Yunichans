@@ -16,6 +16,7 @@
 #include "PlaneActor.h"
 #include "Block.hpp"
 #include "Ball.hpp"
+#include "Grid_obj.hpp"
 
 Game *_gameInstance = nullptr;
 Renderer *_rendererInstance = nullptr;
@@ -159,8 +160,10 @@ void Game::GenerateOutput()
 void Game::LoadData()
 {
 	// Create actors
-//    //キューブのオブジェクト制作
     
+    new Grid();
+    
+//    //キューブのオブジェクト制作
     MeshComponent* mc;
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){

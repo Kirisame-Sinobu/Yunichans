@@ -28,6 +28,7 @@
 		F4438EB0235433A4006A6EF0 /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4438EAE235433A4006A6EF0 /* Block.cpp */; };
 		F4438EB323543AE8006A6EF0 /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4438EB123543AE8006A6EF0 /* Ball.cpp */; };
 		F4438EB92354627A006A6EF0 /* MoveBallComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4438EB72354627A006A6EF0 /* MoveBallComponent.cpp */; };
+		F4A8A04123583300002AA3D6 /* Grid_obj.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4A8A03F23583300002AA3D6 /* Grid_obj.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,8 @@
 		F4438EB223543AE8006A6EF0 /* Ball.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
 		F4438EB72354627A006A6EF0 /* MoveBallComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MoveBallComponent.cpp; sourceTree = "<group>"; };
 		F4438EB82354627A006A6EF0 /* MoveBallComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MoveBallComponent.hpp; sourceTree = "<group>"; };
+		F4A8A03F23583300002AA3D6 /* Grid_obj.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Grid_obj.cpp; sourceTree = "<group>"; };
+		F4A8A04023583300002AA3D6 /* Grid_obj.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Grid_obj.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +158,8 @@
 		F4438EB623543B83006A6EF0 /* GameObj */ = {
 			isa = PBXGroup;
 			children = (
+				F4A8A03F23583300002AA3D6 /* Grid_obj.cpp */,
+				F4A8A04023583300002AA3D6 /* Grid_obj.hpp */,
 				F4438EAE235433A4006A6EF0 /* Block.cpp */,
 				F4438EAF235433A4006A6EF0 /* Block.hpp */,
 				F4438EB123543AE8006A6EF0 /* Ball.cpp */,
@@ -248,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4438EB323543AE8006A6EF0 /* Ball.cpp in Sources */,
+				F4A8A04123583300002AA3D6 /* Grid_obj.cpp in Sources */,
 				92279F471F17101E00D5F4B9 /* VertexArray.cpp in Sources */,
 				9223C47D1F009428009A94D7 /* Main.cpp in Sources */,
 				9223C47E1F009428009A94D7 /* Math.cpp in Sources */,
