@@ -17,6 +17,7 @@ Ball::Ball()
 {
     mMoveComp = new MoveComponent(this);
     mMeshComp = new MeshComponent(this);
+//    mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Sphere.gpmesh"));
     mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Sphere.gpmesh"));
 }
 

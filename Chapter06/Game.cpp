@@ -170,6 +170,10 @@ void Game::LoadData()
             Quaternion q(Vector3::UnitY, -Math::Pi);
             q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
             block->SetRotation(q);
+//            SpriteComponent* _sc = new SpriteComponent(block);
+//            _sc->SetTexture(mRenderer->GetTexture("Assets/Cube.png"));
+            
+            
 //            mc = new MeshComponent(block);
 //            mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
         }
@@ -252,8 +256,8 @@ void Game::LoadData()
 //	// Camera actor
 //	mCameraActor = new CameraActor();
 //
-////	// UI elements
-//    
+//	// UI elements
+    
 //	Actor* a = new Actor(/*this*/);
 //	a->SetPosition(Vector3(-350.0f, -350.0f, 0.0f));
 //	SpriteComponent* sc = new SpriteComponent(a);
