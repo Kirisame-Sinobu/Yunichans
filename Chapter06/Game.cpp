@@ -169,7 +169,7 @@ void Game::LoadData()
         for(int j = 0; j < 10; j++){
             Block* block = new Block();
             block->SetPosition(Vector3(101.0f * i, 101.0f * j, 100.0f));
-            block->SetScale(100.0f);
+            block->SetScale(10.0f);
             Quaternion q(Vector3::UnitY, -Math::Pi);
             q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
             block->SetRotation(q);
