@@ -221,7 +221,7 @@ void Game::LoadData()
 //		a->SetRotation(q);
 //	}
 
-	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
+//	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
 	// Forward/back walls 上下の壁作成
 //	for (int i = 0; i < 10; i++)
 //	{
