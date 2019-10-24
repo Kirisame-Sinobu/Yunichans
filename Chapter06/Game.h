@@ -26,7 +26,9 @@ public:
 
 	void AddActor(class Actor* actor);
 	void RemoveActor(class Actor* actor);
-    int GetHoge(){return hoge;}
+    
+    int GetFieldHeight(){return fieldHeight;}
+    int GetFieldWidth(){return fieldWidth;}
 
 	class Renderer* GetRenderer() { return mRenderer; }
 private:
@@ -51,7 +53,8 @@ private:
 	// Track if we're updating actors right now
 	bool mUpdatingActors;
     
-    int hoge = 0;
+    int fieldHeight = 500;
+    int fieldWidth = 500;
 
 	// Game-specific code
 	class CameraActor* mCameraActor;

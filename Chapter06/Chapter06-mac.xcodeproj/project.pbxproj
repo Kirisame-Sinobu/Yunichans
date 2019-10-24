@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CA97798236172F500D0D97E /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA97796236172F500D0D97E /* Wall.cpp */; };
 		9206FDC61F140707005078A2 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9206FDC41F140707005078A2 /* Texture.cpp */; };
 		9206FDC91F140D40005078A2 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9206FDC71F140D40005078A2 /* Shader.cpp */; };
 		9223C4781F009428009A94D7 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9223C4671F009428009A94D7 /* Game.cpp */; };
@@ -34,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0CA97796236172F500D0D97E /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
+		0CA97797236172F500D0D97E /* Wall.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Wall.hpp; sourceTree = "<group>"; };
 		9206FDC31F13F7E8005078A2 /* Shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shaders; sourceTree = "<group>"; };
 		9206FDC41F140707005078A2 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		9206FDC51F140707005078A2 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 				F4438EB223543AE8006A6EF0 /* Ball.hpp */,
 				F42CD383235DA0B800449EBA /* Bar.cpp */,
 				F42CD384235DA0B800449EBA /* Bar.hpp */,
+				0CA97796236172F500D0D97E /* Wall.cpp */,
+				0CA97797236172F500D0D97E /* Wall.hpp */,
 			);
 			name = GameObj;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				9206FDC91F140D40005078A2 /* Shader.cpp in Sources */,
 				9223C4791F009428009A94D7 /* Actor.cpp in Sources */,
 				92CF0D741F3BBBE50086A0F3 /* MeshComponent.cpp in Sources */,
+				0CA97798236172F500D0D97E /* Wall.cpp in Sources */,
 				92CF0D731F3BBBE50086A0F3 /* Mesh.cpp in Sources */,
 				9223C4951F0CA766009A94D7 /* CircleComponent.cpp in Sources */,
 				9223C47C1F009428009A94D7 /* Component.cpp in Sources */,
