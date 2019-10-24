@@ -17,6 +17,7 @@
 #include "Block.hpp"
 #include "Ball.hpp"
 #include "Grid_obj.hpp"
+#include "Bar.hpp"
 
 Game *_gameInstance = nullptr;
 Renderer *_rendererInstance = nullptr;
@@ -161,14 +162,15 @@ void Game::LoadData()
 {
 	// Create actors
     
-    new Grid();
+    //デバッグ用グリッド
+//    new Grid();
     
 //    //キューブのオブジェクト制作
-    MeshComponent* mc;
+//    MeshComponent* mc;
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             Block* block = new Block();
-            block->SetPosition(Vector3(101.0f * i, 101.0f * j, 100.0f));
+            block->SetPosition(Vector3(500 - (101.0f * i), 500 - (101.0f * j), 200.0f));
             block->SetScale(100.0f);
             Quaternion q(Vector3::UnitY, -Math::Pi);
             q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
@@ -178,31 +180,21 @@ void Game::LoadData()
         }
     }
     
-    
-
-    
-//    for(int i = 0; i < 10; i++){
-//        for(int j = 0; j < 10; j ++){
-//            Actor* a = new Actor();
-//            a->SetPosition(Vector3(200.0f*j, 75.0f*i, 100.0f));
-//            a->SetScale(100.0f);
-//            Quaternion q(Vector3::UnitY, -Math::PiOver2);
-//            q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
-//            a->SetRotation(q);
-//            MeshComponent* mc = new MeshComponent(a);
-//            mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
-//        }
-//    }
 
     //ボールのオブジェクト制作
 	Ball* ball = new Ball();
 	ball->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
 	ball->SetScale(3.0f);
-    Quaternion q(Vector3::UnitY, -Math::PiOver2);
-    q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
-    ball->SetRotation(q);
-    mc = new MeshComponent(ball);
-	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
+//    Quaternion q(Vector3::UnitY, -Math::PiOver2);
+//    q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
+//    ball->SetRotation(q);
+//    mc = new MeshComponent(ball);
+//	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
+    
+    //バー作成
+    Bar *bar = new Bar();
+    bar->SetPosition(Vector3(-200.0f, -100.0f, -200.0f));
+    bar->SetScale(50.0f);
 //
 //	// Setup floor 床の作成
 //	const float start = -1250.0f;

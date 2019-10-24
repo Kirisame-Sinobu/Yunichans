@@ -18,6 +18,10 @@ CameraActor::CameraActor()
 {
 	mMoveComp = new MoveComponent(this);
     SetPosition(Vector3(0,0,10));
+    Quaternion q(Vector3::UnitZ, -Math::PiOver2);
+    SetRotation(q);
+    Vector3 set_pos = Vector3(0,1000,0);
+    SetPosition(set_pos);
 }
 
 void CameraActor::UpdateActor(float deltaTime)
