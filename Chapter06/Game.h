@@ -26,6 +26,7 @@ public:
 
 	void AddActor(class Actor* actor);
 	void RemoveActor(class Actor* actor);
+    int GetHoge(){return hoge;}
 
 	class Renderer* GetRenderer() { return mRenderer; }
 private:
@@ -46,6 +47,8 @@ private:
 	volatile bool mIsRunning;
 	// Track if we're updating actors right now
 	bool mUpdatingActors;
+    
+    int hoge = 0;
 
 	// Game-specific code
 	class CameraActor* mCameraActor;
