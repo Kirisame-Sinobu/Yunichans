@@ -15,7 +15,7 @@ Block::Block()
     :Actor()
 {
     mMeshComp = new MeshComponent(this);
-    mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Cube.gpmesh"));
+    mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Cube1.gpmesh"));
 }
 
 void Block::UpdateActor(float deltaTime)
