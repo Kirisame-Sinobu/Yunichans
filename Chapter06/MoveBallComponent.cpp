@@ -26,8 +26,8 @@ int hit_pos = 7;
 
 void MoveBallComponent::Update(float deltaTime)
 {
-    int baund_under_pos = 200;
-    int side_pos = 500;
+//    int baund_under_pos = 200;
+//    int side_pos = 500;
     Vector3 my_pos = mOwner -> GetPosition();
     if(my_pos.x > /*side_pos*/_gameInstance->GetFieldWidth() && hit_pos != 0){
         mSpeed = x_direction * mSpeed;

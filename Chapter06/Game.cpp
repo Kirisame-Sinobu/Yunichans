@@ -185,7 +185,7 @@ void Game::LoadData()
 	Ball* ball = new Ball();
 	ball->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
 	ball->SetScale(3.0f);
-//    Quaternion q(Vector3::UnitY, -Math::PiOver2);
+    Quaternion q(Vector3::UnitY, -Math::PiOver2);
 //    q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
 //    ball->SetRotation(q);
 //    mc = new MeshComponent(ball);
@@ -197,42 +197,42 @@ void Game::LoadData()
     bar->SetScale(50.0f);
 //
 	// Setup floor 床の作成
-//	const float start = -1250.0f;
-//	const float size = 250.0f;
-//	for (int i = 0; i < 10; i++)
-//	{
-//		for (int j = 0; j < 10; j++)
-//		{
-//			Actor* a = new PlaneActor();
-//			a->SetPosition(Vector3(start + i * size, start + j * size, -100.0f));
-//		}
-//	}
+	const float start = -1250.0f;
+	const float size = 250.0f;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			Actor* a = new PlaneActor();
+			a->SetPosition(Vector3(start + i * size, start + j * size, -(float)(GetFieldHeight())));
+		}
+	}
 
 //	 Left/right walls 左右の壁制作
-//	q = Quaternion(Vector3::UnitX, Math::PiOver2);
-//	for (int i = 0; i < 10; i++)
-//	{
-//		Actor* a = new PlaneActor();
-//		a->SetPosition(Vector3(start + i * size, start - size, 0.0f));
-//		a->SetRotation(q);
-//
-//		a = new PlaneActor();
-//		a->SetPosition(Vector3(start + i * size, -start + size, 0.0f));
-//		a->SetRotation(q);
-//	}
+	/*Quaternion*/ q = Quaternion(Vector3::UnitX, Math::PiOver2);
+	for (int i = 0; i < 10; i++)
+	{
+		Actor* a = new PlaneActor();
+		a->SetPosition(Vector3(start + i * size, start - size/*(float)GetFieldWidth()*/, 0.0f));
+		a->SetRotation(q);
 
-//	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
+		a = new PlaneActor();
+		a->SetPosition(Vector3(start + i * size, -start + size/*-(float)GetFieldWidth()*/, 0.0f));
+		a->SetRotation(q);
+	}
+
+	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
 	// Forward/back walls 上下の壁作成
-//	for (int i = 0; i < 10; i++)
-//	{
-//		Actor* a = new PlaneActor();
-//		a->SetPosition(Vector3(start - size, start + i * size, 0.0f));
-//		a->SetRotation(q);
-//
-//		a = new PlaneActor();
-//		a->SetPosition(Vector3(-start + size, start + i * size, 0.0f));
-//		a->SetRotation(q);
-//	}
+	for (int i = 0; i < 10; i++)
+	{
+		Actor* a = new PlaneActor();
+		a->SetPosition(Vector3(start - size/*(float)GetFieldWidth()*/, start + i * size, 0.0f));
+		a->SetRotation(q);
+
+		a = new PlaneActor();
+        a->SetPosition(Vector3(-start + size/*-(float)GetFieldWidth()*/, start + i * size, 0.0f));
+		a->SetRotation(q);
+	}
 
 	// Setup lights
 	mRenderer->SetAmbientLight(Vector3(1.2f, 1.2f, 1.2f));
