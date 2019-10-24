@@ -25,4 +25,10 @@ void Block::UpdateActor(float deltaTime)
 
 void Block::ActorInput(const uint8_t* keyState)
 {
+    
+}
+
+void Block::Hit_Actor(float deltaTime)
+{
+    
 }

@@ -20,5 +20,5 @@ public:
 private:
     class MeshComponent *mMeshComp;
     class MoveBallComponent *mMoveBallComp;
-    
+    std::string mName = "Ball";
 };

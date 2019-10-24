@@ -38,3 +38,4 @@ void MoveComponent::Update(float deltaTime)
 		mOwner->SetPosition(pos);
 	}
 }
+

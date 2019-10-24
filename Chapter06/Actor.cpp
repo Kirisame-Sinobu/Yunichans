@@ -60,6 +60,10 @@ void Actor::UpdateActor(float deltaTime)
 {
 }
 
+void Actor::Hit_Actor(float deltaTime){
+    
+}
+
 void Actor::ProcessInput(const uint8_t* keyState)
 {
 	if (mState == EActive)
@@ -76,6 +80,7 @@ void Actor::ProcessInput(const uint8_t* keyState)
 
 void Actor::ActorInput(const uint8_t* keyState)
 {
+    //do nothing sub class should implement this method
 }
 
 void Actor::ComputeWorldTransform()

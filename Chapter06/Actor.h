@@ -10,6 +10,7 @@
 #include <vector>
 #include "Math.h"
 #include <cstdint>
+#include <string>
 
 class Actor
 {
@@ -20,6 +21,8 @@ public:
 		EPaused,
 		EDead
 	};
+    
+    
 
 	Actor();
 	virtual ~Actor();
@@ -30,6 +33,7 @@ public:
 	void UpdateComponents(float deltaTime);
 	// Any actor-specific update code (overridable)
 	virtual void UpdateActor(float deltaTime);
+    virtual void Hit_Actor(float deltaTime);
 
 	// ProcessInput function called from Game (not overridable)
 	void ProcessInput(const uint8_t* keyState);
@@ -51,6 +55,9 @@ public:
 
 	State GetState() const { return mState; }
 	void SetState(State state) { mState = state; }
+    
+    void SetName(std::string name){mName = name;}
+    std::string GetName(){return mName;}
 
 //	class Game* GetGame() { return mGame; }
 
@@ -68,6 +75,7 @@ private:
 	Quaternion mRotation;
 	float mScale;
 	bool mRecomputeWorldTransform;
+    std::string mName;
 
 	std::vector<class Component*> mComponents;
 //	class Game* mGame;

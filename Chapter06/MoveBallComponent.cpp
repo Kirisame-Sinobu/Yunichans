@@ -31,7 +31,7 @@ void MoveBallComponent::Update(float deltaTime)
     if(my_pos.x > side_pos && hit_pos != 0){
         mSpeed = x_direction * mSpeed;
         hit_pos = 0;
-        printf("x:");
+//        printf("x:");
 //        printf("mspeed = %f,%f,%f\n",mSpeed.x,mSpeed.y,mSpeed.z);
     }else if(my_pos.x < -side_pos && hit_pos != 1){
         mSpeed = x_direction * mSpeed;
