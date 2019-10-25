@@ -20,5 +20,5 @@ public:
 private:
     class MeshComponent *mMeshComp;
     class Key_move *mKey_move;
-    
+    std::string mName = "Bar";
 };

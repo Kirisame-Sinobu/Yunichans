@@ -18,6 +18,7 @@ Grid::Grid()
     int grid_num = 201;
     float width = 50.0f;
     float scale = 5.0f;
+    
     //x軸のグリット制作
     for(int x = 0; x < grid_num; x++){
         Block* block = new Block();

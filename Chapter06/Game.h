@@ -40,6 +40,9 @@ private:
 	
 	// All the actors in the game
 	std::vector<class Actor*> mActors;
+    std::vector<class Actor*> mBalls;
+    std::vector<class Actor*> mOther_thing;
+    
 	// Any pending actors
 	std::vector<class Actor*> mPendingActors;
 

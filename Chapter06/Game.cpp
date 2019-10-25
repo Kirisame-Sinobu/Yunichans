@@ -108,8 +108,7 @@ void Game::UpdateGame()
     //経過時間ゲット
 	float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
     //処理が重くなり時間が経ち過ぎを防ぐ
-	if (deltaTime > 0.05f)
-	{
+	if (deltaTime > 0.05f){
 		deltaTime = 0.05f;
 	}
     //前フレームの時間をとる
@@ -118,37 +117,43 @@ void Game::UpdateGame()
 	// Update all actors
 	mUpdatingActors = true;
     //全てのアクターのアップデートの処理
-	for (auto actor : mActors)
-	{
+	for (auto actor : mActors){
 		actor->Update(deltaTime);
 	}
 	mUpdatingActors = false;
+    
+    //あたり判定
+    for(auto actor : mBalls){
+        actor -> Hit_Actor(deltaTime);
+    }
 
 	// Move any pending actors to mActors
     //追加されたオブジェクトの処理　その後アクターのリストに追加
-	for (auto pending : mPendingActors)
-	{
+	for (auto pending : mPendingActors){
 		pending->ComputeWorldTransform();
 		mActors.emplace_back(pending);
+        if(pending -> GetName() == "Ball"){
+            mBalls.emplace_back(pending);
+        }else{
+            mOther_thing.emplace_back(pending);
+        }
 	}
 	mPendingActors.clear();
 
 	// Add any dead actors to a temp vector
     //消すオブジェクトの処理
 	std::vector<Actor*> deadActors;
-	for (auto actor : mActors)
-	{
+	for (auto actor : mActors){
         //各オブジェクトの状態を取る
-		if (actor->GetState() == Actor::EDead)
-		{
+		if (actor->GetState() == Actor::EDead){
 			deadActors.emplace_back(actor);
+            
 		}
 	}
 
 	// Delete dead actors (which removes them from mActors)
     //オブジェクトを消す
-	for (auto actor : deadActors)
-	{
+	for (auto actor : deadActors){
 		delete actor;
 	}
 }
@@ -185,7 +190,7 @@ void Game::LoadData()
 	Ball* ball = new Ball();
 	ball->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
 	ball->SetScale(3.0f);
-//    Quaternion q(Vector3::UnitY, -Math::PiOver2);
+    Quaternion q(Vector3::UnitY, -Math::PiOver2);
 //    q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
 //    ball->SetRotation(q);
 //    mc = new MeshComponent(ball);
@@ -197,42 +202,42 @@ void Game::LoadData()
     bar->SetScale(50.0f);
 //
 	// Setup floor 床の作成
-//	const float start = -1250.0f;
-//	const float size = 250.0f;
-//	for (int i = 0; i < 10; i++)
-//	{
-//		for (int j = 0; j < 10; j++)
-//		{
-//			Actor* a = new PlaneActor();
-//			a->SetPosition(Vector3(start + i * size, start + j * size, -100.0f));
-//		}
-//	}
+	const float start = -1250.0f;
+	const float size = 250.0f;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			Actor* a = new PlaneActor();
+			a->SetPosition(Vector3(start + i * size, start + j * size, -(float)(GetFieldHeight())));
+		}
+	}
 
 //	 Left/right walls 左右の壁制作
-//	q = Quaternion(Vector3::UnitX, Math::PiOver2);
-//	for (int i = 0; i < 10; i++)
-//	{
-//		Actor* a = new PlaneActor();
-//		a->SetPosition(Vector3(start + i * size, start - size, 0.0f));
-//		a->SetRotation(q);
-//
-//		a = new PlaneActor();
-//		a->SetPosition(Vector3(start + i * size, -start + size, 0.0f));
-//		a->SetRotation(q);
-//	}
+	/*Quaternion*/ q = Quaternion(Vector3::UnitX, Math::PiOver2);
+	for (int i = 0; i < 10; i++)
+	{
+		Actor* a = new PlaneActor();
+		a->SetPosition(Vector3(start + i * size, start - size/*(float)GetFieldWidth()*/, 0.0f));
+		a->SetRotation(q);
 
-//	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
+		a = new PlaneActor();
+		a->SetPosition(Vector3(start + i * size, -start + size/*-(float)GetFieldWidth()*/, 0.0f));
+		a->SetRotation(q);
+	}
+
+	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
 	// Forward/back walls 上下の壁作成
-//	for (int i = 0; i < 10; i++)
-//	{
-//		Actor* a = new PlaneActor();
-//		a->SetPosition(Vector3(start - size, start + i * size, 0.0f));
-//		a->SetRotation(q);
-//
-//		a = new PlaneActor();
-//		a->SetPosition(Vector3(-start + size, start + i * size, 0.0f));
-//		a->SetRotation(q);
-//	}
+	for (int i = 0; i < 10; i++)
+	{
+		Actor* a = new PlaneActor();
+		a->SetPosition(Vector3(start - size/*(float)GetFieldWidth()*/, start + i * size, 0.0f));
+		a->SetRotation(q);
+
+		a = new PlaneActor();
+        a->SetPosition(Vector3(-start + size/*-(float)GetFieldWidth()*/, start + i * size, 0.0f));
+		a->SetRotation(q);
+	}
 
 	// Setup lights
 	mRenderer->SetAmbientLight(Vector3(1.2f, 1.2f, 1.2f));
@@ -261,13 +266,11 @@ void Game::UnloadData()
 {
 	// Delete actors
 	// Because ~Actor calls RemoveActor, have to use a different style loop
-	while (!mActors.empty())
-	{
+	while (!mActors.empty()){
 		delete mActors.back();
 	}
 
-	if (mRenderer)
-	{
+	if (mRenderer){
 		mRenderer->UnloadData();
 	}
 }
@@ -275,8 +278,7 @@ void Game::UnloadData()
 void Game::Shutdown()
 {
 	UnloadData();
-	if (mRenderer)
-	{
+	if (mRenderer){
 		mRenderer->Shutdown();
 	}
 	SDL_Quit();
@@ -285,13 +287,15 @@ void Game::Shutdown()
 void Game::AddActor(Actor* actor)
 {
 	// If we're updating actors, need to add to pending
-	if (mUpdatingActors)
-	{
+	if (mUpdatingActors){
 		mPendingActors.emplace_back(actor);
-	}
-	else
-	{
+	}else{
 		mActors.emplace_back(actor);
+        if(actor -> GetName() == "Ball"){
+            mBalls.emplace_back(actor);
+        }else{
+            mOther_thing.emplace_back(actor);
+        }
 	}
 }
 
@@ -299,8 +303,7 @@ void Game::RemoveActor(Actor* actor)
 {
 	// Is it in pending actors?
 	auto iter = std::find(mPendingActors.begin(), mPendingActors.end(), actor);
-	if (iter != mPendingActors.end())
-	{
+	if (iter != mPendingActors.end()){
 		// Swap to end of vector and pop off (avoid erase copies)
 		std::iter_swap(iter, mPendingActors.end() - 1);
 		mPendingActors.pop_back();
@@ -308,10 +311,25 @@ void Game::RemoveActor(Actor* actor)
 
 	// Is it in actors?
 	iter = std::find(mActors.begin(), mActors.end(), actor);
-	if (iter != mActors.end())
-	{
+	if (iter != mActors.end()){
 		// Swap to end of vector and pop off (avoid erase copies)
 		std::iter_swap(iter, mActors.end() - 1);
 		mActors.pop_back();
 	}
+    
+    // Is it in Balls?
+    if(actor -> GetName() == "Ball"){
+        iter = std::find(mBalls.begin(), mBalls.end(), actor);
+        if(iter != mBalls.end()){
+            std::iter_swap(iter, mBalls.end() - 1);
+            mBalls.pop_back();
+        }
+    
+    }else{ // Or is it in Other_actors?
+        iter = std::find(mOther_thing.begin(), mOther_thing.end(), actor);
+        if(iter != mOther_thing.end()){
+            std::iter_swap(iter, mOther_thing.end() - 1);
+            mOther_thing.pop_back();
+        }
+    }
 }
