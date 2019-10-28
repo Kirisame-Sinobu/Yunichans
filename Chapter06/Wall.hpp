@@ -14,7 +14,11 @@
 
 class Wall : public Actor
 {
+public:
     Wall();
+private:
+    class MeshComponent* mMeshComp;
+    
 };
 
 //#endif /* Wall_hpp */
