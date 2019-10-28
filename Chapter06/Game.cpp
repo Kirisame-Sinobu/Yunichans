@@ -18,6 +18,7 @@
 #include "Ball.hpp"
 #include "Grid_obj.hpp"
 #include "Bar.hpp"
+#include "CreateField.hpp"
 
 Game *_gameInstance = nullptr;
 Renderer *_rendererInstance = nullptr;
@@ -167,6 +168,8 @@ void Game::LoadData()
 {
 	// Create actors
     
+    new CreateField();
+    
     //デバッグ用グリッド
 //    new Grid();
     
@@ -202,42 +205,45 @@ void Game::LoadData()
     bar->SetScale(50.0f);
 //
 	// Setup floor 床の作成
-	const float start = -1250.0f;
-	const float size = 250.0f;
-	for (int i = 0; i < 10; i++)
-	{
-		for (int j = 0; j < 10; j++)
-		{
-			Actor* a = new PlaneActor();
-			a->SetPosition(Vector3(start + i * size, start + j * size, -(float)(GetFieldHeight())));
-		}
-	}
+//	const float start = 0.0f;
+//	const float size = 1000.0f;
+//	for (int i = 0; i < 2; i++)
+//	{
+//		for (int j = 0; j < 2; j++)
+//		{
+//			Actor* a = new PlaneActor();
+//			a->SetPosition(Vector3(start + i * size, start + j * size, -(GetFieldHeight())));
+//            
+//            a = new PlaneActor();
+//            a->SetPosition(Vector3(start + i * size, start + j * size, (GetFieldHeight())));
+//		}
+//	}
 
 //	 Left/right walls 左右の壁制作
 	/*Quaternion*/ q = Quaternion(Vector3::UnitX, Math::PiOver2);
-	for (int i = 0; i < 10; i++)
-	{
-		Actor* a = new PlaneActor();
-		a->SetPosition(Vector3(start + i * size, start - size/*(float)GetFieldWidth()*/, 0.0f));
-		a->SetRotation(q);
-
-		a = new PlaneActor();
-		a->SetPosition(Vector3(start + i * size, -start + size/*-(float)GetFieldWidth()*/, 0.0f));
-		a->SetRotation(q);
-	}
+//	for (int i = 0; i < 1; i++)
+//	{
+//		Actor* a = new PlaneActor();
+//		a->SetPosition(Vector3(start + i * size, /*start - size*/GetFieldWidth(), 0.0f));
+//		a->SetRotation(q);
+//
+//		a = new PlaneActor();
+//		a->SetPosition(Vector3(start + i * size, /*-start + size*/-GetFieldWidth(), 0.0f));
+//		a->SetRotation(q);
+//	}
 
 	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
 	// Forward/back walls 上下の壁作成
-	for (int i = 0; i < 10; i++)
-	{
-		Actor* a = new PlaneActor();
-		a->SetPosition(Vector3(start - size/*(float)GetFieldWidth()*/, start + i * size, 0.0f));
-		a->SetRotation(q);
-
-		a = new PlaneActor();
-        a->SetPosition(Vector3(-start + size/*-(float)GetFieldWidth()*/, start + i * size, 0.0f));
-		a->SetRotation(q);
-	}
+//	for (int i = 0; i < 1; i++)
+//	{
+//		Actor* a = new PlaneActor();
+//		a->SetPosition(Vector3(/*start - size*/GetFieldWidth(), start + i * size, 0.0f));
+//		a->SetRotation(q);
+//
+//		a = new PlaneActor();
+//        a->SetPosition(Vector3(/*-start + size*/-GetFieldWidth(), start + i * size, 0.0f));
+//		a->SetRotation(q);
+//	}
 
 	// Setup lights
 	mRenderer->SetAmbientLight(Vector3(1.2f, 1.2f, 1.2f));

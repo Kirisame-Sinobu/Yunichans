@@ -7,8 +7,14 @@
 //
 
 #include "Wall.hpp"
+#include "MeshComponent.h"
+#include "Game.h"
+#include "Renderer.h"
 
 Wall::Wall()
     :Actor()
 {
+    SetScale(10.0f);
+    mMeshComp = new MeshComponent(this);
+    mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Plane.gpmesh"));
 }

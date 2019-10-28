@@ -16,7 +16,7 @@ MoveBallComponent::MoveBallComponent(class Actor* owner, int updateOrder)
 ,mAngularSpeed(0.0f)
 ,mForwardSpeed(0.0f)
 {
-    mSpeed = Vector3(1,1,2) * 30;
+    mSpeed = Vector3(1,1,1) * 30;
 }
 
 Vector3 x_direction = Vector3(-1,1,1);
