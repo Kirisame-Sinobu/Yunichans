@@ -170,8 +170,8 @@
 		F4438EB623543B83006A6EF0 /* GameObj */ = {
 			isa = PBXGroup;
 			children = (
-				0C63D8F12367C0AE00549284 /* CreateField.hpp */,
 				0C63D8EF2367C0A500549284 /* CreateField.cpp */,
+				0C63D8F12367C0AE00549284 /* CreateField.hpp */,
 				F4A8A03F23583300002AA3D6 /* Grid_obj.cpp */,
 				F4A8A04023583300002AA3D6 /* Grid_obj.hpp */,
 				F4438EAE235433A4006A6EF0 /* Block.cpp */,

@@ -25,9 +25,9 @@ CreateField::CreateField()
     
     Quaternion q(Vector3::UnitY, -Math::PiOver2);
     //床と天井
-    for (int i = 0; i < 5/*(int)floorCount*/; i++)
+    for (int i = 0; i < 2/*(int)floorCount*/; i++)
     {
-        for (int j = 0; j < 5/*(int)floorCount*/; j++)
+        for (int j = 0; j < 2/*(int)floorCount*/; j++)
         {
             Wall* wall = new Wall();
             wall->SetPosition(Vector3(start + i * size, start + j * size, -(_gameInstance->GetFieldHeight())));
@@ -39,27 +39,31 @@ CreateField::CreateField()
     //左右壁
 //    q = Quaternion(Vector3::UnitX, Math::PiOver2);
     q = Quaternion(Vector3::UnitX, Math::PiOver2);
-    for (int i = 0; i < 5/*(int)wallCount*/; i++)
+    for (int i = 0; i < 2/*(int)wallCount*/; i++)
     {
-        Wall* wall = new Wall();
-        wall->SetPosition(Vector3(start + i * size, /*start - size*/_gameInstance->GetFieldWidth(), 0.0f));
-        wall->SetRotation(q);
-        
-        wall = new Wall();
-        wall->SetPosition(Vector3(start + i * size, /*-start + size*/-(_gameInstance->GetFieldWidth()), 0.0f));
-        wall->SetRotation(q);
+        for(int j = 0; j < 2; j++){
+            Wall* wall = new Wall();
+            wall->SetPosition(Vector3(start + i * size, _gameInstance->GetFieldWidth(), -start - (_gameInstance->GetFieldHeight()) + j * size));
+            wall->SetRotation(q);
+            
+            wall = new Wall();
+            wall->SetPosition(Vector3(start + i * size, -(_gameInstance->GetFieldWidth()), -start - (_gameInstance->GetFieldHeight()) + j * size));
+            wall->SetRotation(q);
+        }
     }
     
     //上下壁
     q = Quaternion::Concatenate(q,Quaternion(Vector3::UnitZ, Math::PiOver2));
-    for (int i = 0; i < 5/*(int)wallCount*/; i++)
+    for (int i = 0; i < 2/*(int)wallCount*/; i++)
     {
-        Wall* wall = new Wall();
-        wall->SetPosition(Vector3(/*start - size*/_gameInstance->GetFieldWidth(), start + i * size, 0.0f));
-        wall->SetRotation(q);
+        for (int j = 0; j < 2; j++){
+            Wall* wall = new Wall();
+            wall->SetPosition(Vector3(/*start - size*/_gameInstance->GetFieldWidth(), start + i * size, -start - (_gameInstance->GetFieldHeight()) + j * size));
+            wall->SetRotation(q);
         
-        wall = new Wall();
-        wall->SetPosition(Vector3(/*-start + size*/-(_gameInstance->GetFieldWidth()), start + i * size, 0.0f));
-        wall->SetRotation(q);
+            wall = new Wall();
+            wall->SetPosition(Vector3(/*-start + size*/-(_gameInstance->GetFieldWidth()), start + i * size, -start - (_gameInstance->GetFieldHeight()) + j * size));
+            wall->SetRotation(q);
+        }
     }
 }
