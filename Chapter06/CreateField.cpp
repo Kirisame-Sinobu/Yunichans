@@ -24,7 +24,7 @@ CreateField::CreateField()
     
     
     Quaternion q(Vector3::UnitY, -Math::PiOver2);
-    //床
+    //床と天井
     for (int i = 0; i < 5/*(int)floorCount*/; i++)
     {
         for (int j = 0; j < 5/*(int)floorCount*/; j++)

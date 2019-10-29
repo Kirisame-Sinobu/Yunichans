@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C63D8F02367C0A500549284 /* CreateField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C63D8EF2367C0A500549284 /* CreateField.cpp */; };
 		0CA97798236172F500D0D97E /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA97796236172F500D0D97E /* Wall.cpp */; };
 		9206FDC61F140707005078A2 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9206FDC41F140707005078A2 /* Texture.cpp */; };
 		9206FDC91F140D40005078A2 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9206FDC71F140D40005078A2 /* Shader.cpp */; };
@@ -35,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C63D8EF2367C0A500549284 /* CreateField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CreateField.cpp; sourceTree = "<group>"; };
+		0C63D8F12367C0AE00549284 /* CreateField.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CreateField.hpp; sourceTree = "<group>"; };
 		0CA97796236172F500D0D97E /* Wall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
 		0CA97797236172F500D0D97E /* Wall.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Wall.hpp; sourceTree = "<group>"; };
 		9206FDC31F13F7E8005078A2 /* Shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shaders; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 		F4438EB623543B83006A6EF0 /* GameObj */ = {
 			isa = PBXGroup;
 			children = (
+				0C63D8F12367C0AE00549284 /* CreateField.hpp */,
+				0C63D8EF2367C0A500549284 /* CreateField.cpp */,
 				F4A8A03F23583300002AA3D6 /* Grid_obj.cpp */,
 				F4A8A04023583300002AA3D6 /* Grid_obj.hpp */,
 				F4438EAE235433A4006A6EF0 /* Block.cpp */,
@@ -275,6 +280,7 @@
 				9223C47E1F009428009A94D7 /* Math.cpp in Sources */,
 				92CF0D721F3BBBE50086A0F3 /* CameraActor.cpp in Sources */,
 				9223C4781F009428009A94D7 /* Game.cpp in Sources */,
+				0C63D8F02367C0A500549284 /* CreateField.cpp in Sources */,
 				9223C4801F009428009A94D7 /* SpriteComponent.cpp in Sources */,
 				92CF0D761F3BBBE50086A0F3 /* Renderer.cpp in Sources */,
 				9223C48B1F0CA3CE009A94D7 /* MoveComponent.cpp in Sources */,
