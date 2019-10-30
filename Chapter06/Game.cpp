@@ -171,22 +171,22 @@ void Game::LoadData()
     new CreateField();
     
     //デバッグ用グリッド
-//    new Grid();
+    new Grid();
     
 //    //キューブのオブジェクト制作
 //    MeshComponent* mc;
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 10; j++){
-            Block* block = new Block();
-            block->SetPosition(Vector3(500 - (101.0f * i), 500 - (101.0f * j), 200.0f));
-            block->SetScale(100.0f);
-            Quaternion q(Vector3::UnitY, -Math::Pi);
-            q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
-            block->SetRotation(q);
-//            mc = new MeshComponent(block);
-//            mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
-        }
-    }
+//    for(int i = 0; i < 10; i++){
+//        for(int j = 0; j < 10; j++){
+//            Block* block = new Block();
+//            block->SetPosition(Vector3(500 - (101.0f * i), 500 - (101.0f * j), 200.0f));
+//            block->SetScale(100.0f);
+//            Quaternion q(Vector3::UnitY, -Math::Pi);
+//            q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
+//            block->SetRotation(q);
+////            mc = new MeshComponent(block);
+////            mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
+//        }
+//    }
     
 
     //ボールのオブジェクト制作
