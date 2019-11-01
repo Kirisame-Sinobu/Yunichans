@@ -27,7 +27,7 @@ public:
 	void AddActor(class Actor* actor);
 	void RemoveActor(class Actor* actor);
     
-    float GetFieldHeight(){return fieldHeight;}
+//    float GetFieldHeight(){return fieldHeight;}
     float GetFieldWidth(){return fieldWidth;}
 
 	class Renderer* GetRenderer() { return mRenderer; }
@@ -53,8 +53,8 @@ private:
 	// Track if we're updating actors right now
 	bool mUpdatingActors;
     
-    float fieldHeight = 1000.0f;
-    float fieldWidth = 1000.0f;
+//    float fieldHeight = 1500.0f;
+    float fieldWidth = 500.0f;
 
 	// Game-specific code
 	class CameraActor* mCameraActor;

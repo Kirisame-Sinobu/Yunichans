@@ -16,7 +16,7 @@ MoveBallComponent::MoveBallComponent(class Actor* owner, int updateOrder)
 ,mAngularSpeed(0.0f)
 ,mForwardSpeed(0.0f)
 {
-    mSpeed = Vector3(1,1,1) * 30;
+    mSpeed = Vector3(1,1,2) * 30;
 }
 
 Vector3 x_direction = Vector3(-1,1,1);
@@ -29,33 +29,33 @@ void MoveBallComponent::Update(float deltaTime)
 //    int baund_under_pos = 200;
 //    int side_pos = 500;
     Vector3 my_pos = mOwner -> GetPosition();
-    if(my_pos.x > /*side_pos*/_gameInstance->GetFieldWidth() && hit_pos != 0){
+    if(my_pos.x > /*side_pos*/_gameInstance->GetFieldWidth() - (mOwner->GetState()) && hit_pos != 0){
         mSpeed = x_direction * mSpeed;
         hit_pos = 0;
 //        printf("x:");
 //        printf("mspeed = %f,%f,%f\n",mSpeed.x,mSpeed.y,mSpeed.z);
-    }else if(my_pos.x < /*-side_pos*/-(_gameInstance->GetFieldWidth()) && hit_pos != 1){
+    }else if(my_pos.x < /*-side_pos*/-(_gameInstance->GetFieldWidth()) + (mOwner->GetScale()) && hit_pos != 1){
         mSpeed = x_direction * mSpeed;
         hit_pos = 1;
 //        printf("-x:");
 //        printf("mspeed = %f,%f,%f\n",mSpeed.x,mSpeed.y,mSpeed.z);
     }
-    if(my_pos.y > /*baund_under_pos*/_gameInstance->GetFieldHeight() && hit_pos != 2){
+    if(my_pos.y > /*baund_under_pos*/_gameInstance->GetFieldWidth() - (mOwner->GetScale()) && hit_pos != 2){
         mSpeed = y_direction * mSpeed;
         hit_pos = 2;
 //        printf("y:");
-    }else if(my_pos.y < /*-baund_under_pos*/-(_gameInstance->GetFieldHeight()) && hit_pos != 3){
+    }else if(my_pos.y < /*-baund_under_pos*/-(_gameInstance->GetFieldWidth()) + (mOwner->GetScale()) && hit_pos != 3){
         mSpeed = y_direction * mSpeed;
         hit_pos = 3;
 //        printf("-y:");
 //        printf("mspeed = %f,%f,%f\n",mSpeed.x,mSpeed.y,mSpeed.z);
     }
-    if(my_pos.z > /*side_pos*/_gameInstance->GetFieldWidth() && hit_pos != 4){
+    if(my_pos.z > /*side_pos*/_gameInstance->GetFieldWidth() - (mOwner->GetScale()) && hit_pos != 4){
         mSpeed = z_direction * mSpeed;
         hit_pos = 4;
 //        printf("z:");
 //        printf("mspeed = %f,%f,%f\n",mSpeed.x,mSpeed.y,mSpeed.z);
-    }else if(my_pos.z < /*-side_pos*/-(_gameInstance->GetFieldWidth()) && hit_pos != 5){
+    }else if(my_pos.z < /*-side_pos*/-(_gameInstance->GetFieldWidth()) + (mOwner->GetScale()) && hit_pos != 5){
         mSpeed = z_direction * mSpeed;
         hit_pos = 5;
 //        printf("-z:");
