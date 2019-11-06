@@ -126,25 +126,40 @@ void Game::UpdateGame()
     
     //あたり判定
     Vector3 temp_ball_pos;
-    Vector3 temp_block_pos;
+    Vector3 temp_pos;
     for(auto ball : mBalls){
 //        printf("hoge");
         temp_ball_pos = ball -> GetPosition();
-        if(temp_ball_pos.z > (block_hight-50)){
+        //ブロックの当たり判定
+        if(temp_ball_pos.z > (block_height-50)){
             for(auto block : mBlocks){
 //                printf("kore");
-                temp_block_pos = block -> GetPosition();
-                if((temp_ball_pos.x > temp_block_pos.x - block_scale.x) && (temp_ball_pos.x < temp_block_pos.x + block_scale.x)){
-                    if((temp_ball_pos.y > temp_block_pos.y - block_scale.y) && (temp_ball_pos.y < temp_block_pos.y + block_scale.y)){
-                        if((temp_ball_pos.y > temp_block_pos.y - block_scale.y) && (temp_ball_pos.y < temp_block_pos.y + block_scale.y)){
-                            block -> Hit_Actor();
-                            ball -> Hit_Actor();
-                            printf("\nbreak_block");
+                temp_pos = block -> GetPosition();
+                if((temp_ball_pos.x > temp_pos.x - block_scale.x) && (temp_ball_pos.x < temp_pos.x + block_scale.x)){
+                    if((temp_ball_pos.y > temp_pos.y - block_scale.y) && (temp_ball_pos.y < temp_pos.y + block_scale.y)){
+                        if((temp_ball_pos.y > temp_pos.y - block_scale.y) && (temp_ball_pos.y < temp_pos.y + block_scale.y)){
+                            block -> Hit_Actor(0);
+                            ball -> Hit_Actor(0);
+//                            printf("\nbreak_block");
                             break;
                         }
                     }
                 }
             }
+        }else if(temp_ball_pos.z < bar_under + 50.0f){
+            for(auto bar : mBars){
+                temp_pos = bar -> GetPosition();
+                if((temp_ball_pos.x > temp_pos.x - bar_scale.x) && (temp_ball_pos.x < temp_pos.x + bar_scale.x)){
+                    if((temp_ball_pos.y > temp_pos.y - bar_scale.y) && (temp_ball_pos.y < temp_pos.y + bar_scale.y)){
+                        if((temp_ball_pos.z > temp_pos.z - bar_scale.z) && (temp_ball_pos.z < temp_pos.z + bar_scale.z)){
+                            bar -> Hit_Actor(0);
+                            ball -> Hit_Actor(1);
+//                            printf("hit_bar");
+                        }
+                    }
+                }
+            }
+
         }
     }
     
@@ -155,18 +170,11 @@ void Game::UpdateGame()
 	for (auto pending : mPendingActors){
 		pending->ComputeWorldTransform();
 		mActors.emplace_back(pending);
-        if(pending -> GetName() == "Ball"){
-            mBalls.emplace_back(pending);
-        }else if(pending -> GetName() == "Block"){
-            mBlocks.emplace_back(pending);
-        }
-        else{
-            mOther_thing.emplace_back(pending);
-        }
+        mOther_thing.emplace_back(pending);
 	}
 	mPendingActors.clear();
     
-    //継承先ではメンバ変数を変更できなかったので、ここでブロックとボールをリストに追加
+    //継承先ではメンバ変数を変更できなかったので、ここでブロックとボールをリストに追加 さらにバー追加
     for (auto pending : mOther_thing){
         if(pending -> GetName() == "Block"){
             mBlocks.emplace_back(pending);
@@ -174,6 +182,8 @@ void Game::UpdateGame()
         }else if(pending -> GetName() == "Ball"){
             mBalls.emplace_back(pending);
 //            printf("add_ball");
+        }else if(pending -> GetName() == "Bar"){
+            mBars.emplace_back(pending);
         }
     }
     mOther_thing.clear();
@@ -214,7 +224,7 @@ void Game::LoadData()
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             Block* block = new Block();
-            block->SetPosition(Vector3(500 - (101.0f * i), 500 - (101.0f * j), block_hight));
+            block->SetPosition(Vector3(500 - (101.0f * i), 500 - (101.0f * j), block_height));
             block->SetScale(100.0f);
             Quaternion q(Vector3::UnitY, -Math::Pi);
             q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
@@ -233,11 +243,11 @@ void Game::LoadData()
 //    mc = new MeshComponent(ball);
 //	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
     
-    //バー作成
-//    Bar *bar = new Bar();
-//    bar->SetPosition(Vector3(-200.0f, -100.0f, -200.0f));
-//    bar->SetScale(50.0f);
-//
+//    バー作成
+    Bar *bar = new Bar();
+    bar->SetPosition(Vector3(-200.0f, -100, bar_under));
+    bar->SetScale(50.0f);
+
 	// Setup floor 床の作成
 //	const float start = 0.0f;
 //	const float size = 1000.0f;
@@ -332,18 +342,7 @@ void Game::AddActor(Actor* actor)
 		mPendingActors.emplace_back(actor);
 	}else{
 		mActors.emplace_back(actor);
-//        printf("actor");
-        if(actor -> GetName() == "Ball"){
-//            printf("ball");
-            mBalls.emplace_back(actor);
-        }else if(actor -> GetName() == "Block"){
-//            printf("Block");
-            mBlocks.emplace_back(actor);
-        }
-        else{
-//            printf("other");
-            mOther_thing.emplace_back(actor);
-        }
+        mOther_thing.emplace_back(actor);
 	}
 }
 
@@ -377,6 +376,12 @@ void Game::RemoveActor(Actor* actor)
         if(iter != mBlocks.end()){
             std::iter_swap(iter, mBlocks.end() - 1);
             mBlocks.pop_back();
+        }
+    }else if(actor -> GetName() == "Bar"){
+        iter = std::find(mBars.begin(), mBars.end(), actor);
+        if(iter != mBars.end()){
+            std::iter_swap(iter, mBars.end() - 1);
+            mBars.pop_back();
         }
     }
     else{ // Or is it in Other_actors?

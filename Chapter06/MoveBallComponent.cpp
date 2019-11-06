@@ -10,18 +10,28 @@
 #include "Actor.h"
 #include <stdio.h>
 #include "Game.h"
+Vector3 x_direction = Vector3(-1,1,1);
+Vector3 y_direction = Vector3(1,-1,1);
+Vector3 z_direction = Vector3(1,1,-1);
 
 MoveBallComponent::MoveBallComponent(class Actor* owner, int updateOrder)
 :Component(owner, updateOrder)
 ,mAngularSpeed(0.0f)
 ,mForwardSpeed(0.0f)
 {
-    mSpeed = Vector3(1,1,2) * 30;
+    mSpeed = Vector3(1,1,2) * 5;
+    int temp = (int)random()%3;
+    if(temp == 0){
+        mSpeed = x_direction * mSpeed;
+    }else if(temp == 1){
+        mSpeed = y_direction * mSpeed;
+    }else if(temp == 2){
+        mSpeed = z_direction * mSpeed;
+    }
+    
 }
 
-Vector3 x_direction = Vector3(-1,1,1);
-Vector3 y_direction = Vector3(1,-1,1);
-Vector3 z_direction = Vector3(1,1,-1);
+
 
 void MoveBallComponent::Update(float deltaTime)
 {
@@ -42,6 +52,7 @@ void MoveBallComponent::Update(float deltaTime)
 //        printf("y:");
     }else if(my_pos.y < /*-baund_under_pos*/-(_gameInstance->GetFieldWidth()) + (mOwner->GetScale()) && mSpeed.y < 0){
         mSpeed = y_direction * mSpeed;
+       
 //        printf("-y:");
 //        printf("mspeed = %f,%f,%f\n",mSpeed.x,mSpeed.y,mSpeed.z);
     }
@@ -50,7 +61,8 @@ void MoveBallComponent::Update(float deltaTime)
 //        printf("z:");
 //        printf("mspeed = %f,%f,%f\n",mSpeed.x,mSpeed.y,mSpeed.z);
     }else if(my_pos.z < /*-side_pos*/-(_gameInstance->GetFieldWidth()) + (mOwner->GetScale()) && mSpeed.z < 0){
-        mSpeed = z_direction * mSpeed;
+//        mSpeed = z_direction * mSpeed;
+         mOwner -> SetState(mOwner -> EDead);
 //        printf("-z:");
 //        printf("mspeed = %f,%f,%f\n",mSpeed.x,mSpeed.y,mSpeed.z);
     }
@@ -64,12 +76,10 @@ void MoveBallComponent::Hit_block(int pos){
     
     if(pos == 1){
         mSpeed = x_direction * mSpeed;
-    }else{
-        mSpeed = z_direction * mSpeed;
+    }else if(pos == 2){
+        mSpeed.z = Math::Abs(mSpeed.z);
     }
-    
-    
-    
-    
-    
+    else{
+        mSpeed = y_direction * mSpeed;
+    }
 }

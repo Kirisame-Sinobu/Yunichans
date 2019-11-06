@@ -43,6 +43,7 @@ private:
     std::vector<class Actor*> mBalls;
     std::vector<class Actor*> mOther_thing;
     std::vector<class Actor*> mBlocks;
+    std::vector<class Actor*> mBars;
     
 	// Any pending actors
 	std::vector<class Actor*> mPendingActors;
@@ -59,10 +60,16 @@ private:
     
     //ブロックの当たり判定に使用
     //ブロックの上に配置している位置
-    const float block_hight = 200.0f;
+    const float block_height = 200.0f;
     const float block_under = 0.0f;
+    
+    //Barの高さ
+    const float bar_under = -300.0f;
     //ブロックの大きさ
-    Vector3 block_scale = Vector3(50.0f,50.0f,50.0f);
+    const Vector3 block_scale = Vector3(50.0f,50.0f,50.0f);
+    
+    //barの大きさ
+    const Vector3 bar_scale = Vector3(100.0f,100.0f,100.0f);
 
 	// Game-specific code
 	class CameraActor* mCameraActor;
