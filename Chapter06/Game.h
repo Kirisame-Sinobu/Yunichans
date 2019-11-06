@@ -54,7 +54,7 @@ private:
 	bool mUpdatingActors;
     
 //    float fieldHeight = 1500.0f;
-    float fieldWidth = 500.0f;
+    float fieldWidth = 1000.0f;
 
 	// Game-specific code
 	class CameraActor* mCameraActor;

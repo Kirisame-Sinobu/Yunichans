@@ -171,7 +171,7 @@ void Game::LoadData()
     new CreateField();
     
     //デバッグ用グリッド
-    new Grid();
+//    new Grid();
     
 //    //キューブのオブジェクト制作
 //    MeshComponent* mc;
