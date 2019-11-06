@@ -19,6 +19,7 @@ Ball::Ball()
     mMeshComp = new MeshComponent(this);
 //    mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Sphere.gpmesh"));
     mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Sphere.gpmesh"));
+    SetName("Ball");
 }
 
 void Ball::UpdateActor(float deltaTime)
@@ -29,4 +30,13 @@ void Ball::UpdateActor(float deltaTime)
 void Ball::ActorInput(const uint8_t* keys)
 {
     
+}
+
+void Ball::Hit_Actor(){
+    int rand = (int)random()%10;
+    if(rand > 5){
+        mMoveBallComp -> Hit_block(0);
+    }else{
+        mMoveBallComp -> Hit_block(1);
+    }
 }

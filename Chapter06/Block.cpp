@@ -16,6 +16,8 @@ Block::Block()
 {
     mMeshComp = new MeshComponent(this);
     mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Cube.gpmesh"));
+    SetName("Block");
+//    printf("hogehoge");
 }
 
 void Block::UpdateActor(float deltaTime)
@@ -28,7 +30,7 @@ void Block::ActorInput(const uint8_t* keyState)
     
 }
 
-void Block::Hit_Actor(float deltaTime)
+void Block::Hit_Actor()
 {
-    
+    SetState(EDead);
 }

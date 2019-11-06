@@ -17,7 +17,9 @@ public:
 
     void UpdateActor(float deltaTime) override;
     void ActorInput(const uint8_t* keyState) override;
-    void Hit_Actor(float deltatime) override;
+    void Hit_Actor() override;
+    std::string Get_Name(){return mName;}
+    
 private:
     class MeshComponent* mMeshComp;
     std::string mName = "Block";

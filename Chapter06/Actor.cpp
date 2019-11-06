@@ -60,7 +60,7 @@ void Actor::UpdateActor(float deltaTime)
 {
 }
 
-void Actor::Hit_Actor(float deltaTime){
+void Actor::Hit_Actor(){
     
 }
 

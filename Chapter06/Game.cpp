@@ -120,13 +120,35 @@ void Game::UpdateGame()
     //全てのアクターのアップデートの処理
 	for (auto actor : mActors){
 		actor->Update(deltaTime);
+       // printf("up");
 	}
-	mUpdatingActors = false;
+	
     
     //あたり判定
-    for(auto actor : mBalls){
-        actor -> Hit_Actor(deltaTime);
+    Vector3 temp_ball_pos;
+    Vector3 temp_block_pos;
+    for(auto ball : mBalls){
+//        printf("hoge");
+        temp_ball_pos = ball -> GetPosition();
+        if(temp_ball_pos.z > (block_hight-50)){
+            for(auto block : mBlocks){
+//                printf("kore");
+                temp_block_pos = block -> GetPosition();
+                if((temp_ball_pos.x > temp_block_pos.x - block_scale.x) && (temp_ball_pos.x < temp_block_pos.x + block_scale.x)){
+                    if((temp_ball_pos.y > temp_block_pos.y - block_scale.y) && (temp_ball_pos.y < temp_block_pos.y + block_scale.y)){
+                        if((temp_ball_pos.y > temp_block_pos.y - block_scale.y) && (temp_ball_pos.y < temp_block_pos.y + block_scale.y)){
+                            block -> Hit_Actor();
+                            ball -> Hit_Actor();
+                            printf("\nbreak_block");
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
+    
+    mUpdatingActors = false;
 
 	// Move any pending actors to mActors
     //追加されたオブジェクトの処理　その後アクターのリストに追加
@@ -135,11 +157,26 @@ void Game::UpdateGame()
 		mActors.emplace_back(pending);
         if(pending -> GetName() == "Ball"){
             mBalls.emplace_back(pending);
-        }else{
+        }else if(pending -> GetName() == "Block"){
+            mBlocks.emplace_back(pending);
+        }
+        else{
             mOther_thing.emplace_back(pending);
         }
 	}
 	mPendingActors.clear();
+    
+    //継承先ではメンバ変数を変更できなかったので、ここでブロックとボールをリストに追加
+    for (auto pending : mOther_thing){
+        if(pending -> GetName() == "Block"){
+            mBlocks.emplace_back(pending);
+//            printf("hogehogehogoe");
+        }else if(pending -> GetName() == "Ball"){
+            mBalls.emplace_back(pending);
+//            printf("add_ball");
+        }
+    }
+    mOther_thing.clear();
 
 	// Add any dead actors to a temp vector
     //消すオブジェクトの処理
@@ -168,25 +205,22 @@ void Game::LoadData()
 {
 	// Create actors
     
-    new CreateField();
+//    new CreateField();
     
     //デバッグ用グリッド
-    new Grid();
+//    new Grid();
     
-//    //キューブのオブジェクト制作
-//    MeshComponent* mc;
-//    for(int i = 0; i < 10; i++){
-//        for(int j = 0; j < 10; j++){
-//            Block* block = new Block();
-//            block->SetPosition(Vector3(500 - (101.0f * i), 500 - (101.0f * j), 200.0f));
-//            block->SetScale(100.0f);
-//            Quaternion q(Vector3::UnitY, -Math::Pi);
-//            q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
-//            block->SetRotation(q);
-////            mc = new MeshComponent(block);
-////            mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
-//        }
-//    }
+    //キューブのオブジェクト制作
+    for(int i = 0; i < 10; i++){
+        for(int j = 0; j < 10; j++){
+            Block* block = new Block();
+            block->SetPosition(Vector3(500 - (101.0f * i), 500 - (101.0f * j), block_hight));
+            block->SetScale(100.0f);
+            Quaternion q(Vector3::UnitY, -Math::Pi);
+            q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
+            block->SetRotation(q);
+        }
+    }
     
 
     //ボールのオブジェクト制作
@@ -200,9 +234,9 @@ void Game::LoadData()
 //	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
     
     //バー作成
-    Bar *bar = new Bar();
-    bar->SetPosition(Vector3(-200.0f, -100.0f, -200.0f));
-    bar->SetScale(50.0f);
+//    Bar *bar = new Bar();
+//    bar->SetPosition(Vector3(-200.0f, -100.0f, -200.0f));
+//    bar->SetScale(50.0f);
 //
 	// Setup floor 床の作成
 //	const float start = 0.0f;
@@ -220,7 +254,7 @@ void Game::LoadData()
 //	}
 
 //	 Left/right walls 左右の壁制作
-	/*Quaternion*/ q = Quaternion(Vector3::UnitX, Math::PiOver2);
+//	/*Quaternion*/ q = Quaternion(Vector3::UnitX, Math::PiOver2);
 //	for (int i = 0; i < 1; i++)
 //	{
 //		Actor* a = new PlaneActor();
@@ -232,7 +266,7 @@ void Game::LoadData()
 //		a->SetRotation(q);
 //	}
 
-	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
+//	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
 	// Forward/back walls 上下の壁作成
 //	for (int i = 0; i < 1; i++)
 //	{
@@ -293,13 +327,21 @@ void Game::Shutdown()
 void Game::AddActor(Actor* actor)
 {
 	// If we're updating actors, need to add to pending
+//    printf("%s",actor -> GetName());
 	if (mUpdatingActors){
 		mPendingActors.emplace_back(actor);
 	}else{
 		mActors.emplace_back(actor);
+//        printf("actor");
         if(actor -> GetName() == "Ball"){
+//            printf("ball");
             mBalls.emplace_back(actor);
-        }else{
+        }else if(actor -> GetName() == "Block"){
+//            printf("Block");
+            mBlocks.emplace_back(actor);
+        }
+        else{
+//            printf("other");
             mOther_thing.emplace_back(actor);
         }
 	}
@@ -330,8 +372,14 @@ void Game::RemoveActor(Actor* actor)
             std::iter_swap(iter, mBalls.end() - 1);
             mBalls.pop_back();
         }
-    
-    }else{ // Or is it in Other_actors?
+    }else if(actor -> GetName() == "Block"){//Or is it in Block?
+        iter = std::find(mBlocks.begin(), mBlocks.end(), actor);
+        if(iter != mBlocks.end()){
+            std::iter_swap(iter, mBlocks.end() - 1);
+            mBlocks.pop_back();
+        }
+    }
+    else{ // Or is it in Other_actors?
         iter = std::find(mOther_thing.begin(), mOther_thing.end(), actor);
         if(iter != mOther_thing.end()){
             std::iter_swap(iter, mOther_thing.end() - 1);
