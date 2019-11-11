@@ -32,11 +32,15 @@ void Ball::ActorInput(const uint8_t* keys)
     
 }
 
-void Ball::Hit_Actor(){
-    int rand = (int)random()%10;
-    if(rand > 5){
-        mMoveBallComp -> Hit_block(0);
-    }else{
-        mMoveBallComp -> Hit_block(1);
+void Ball::Hit_Actor(int pos){
+    if(pos == 0){
+        int rand = (int)random()%10;
+        if(rand > 5){
+            mMoveBallComp -> Hit_block(0);
+        }else{
+            mMoveBallComp -> Hit_block(1);
+        }
+    }else if(pos == 1){
+        mMoveBallComp -> Hit_block(2);
     }
 }

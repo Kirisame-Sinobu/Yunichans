@@ -10,6 +10,7 @@
 #include "MeshComponent.h"
 #include "Game.h"
 #include "Renderer.h"
+#include "Ball.hpp"
 
 Block::Block()
     :Actor()
@@ -18,6 +19,12 @@ Block::Block()
     mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Cube.gpmesh"));
     SetName("Block");
 //    printf("hogehoge");
+}
+
+Block::~Block(){
+    Ball* ball = new Ball();
+    ball->SetPosition(GetPosition());
+    ball->SetScale(3.0f);
 }
 
 void Block::UpdateActor(float deltaTime)
@@ -30,7 +37,7 @@ void Block::ActorInput(const uint8_t* keyState)
     
 }
 
-void Block::Hit_Actor()
+void Block::Hit_Actor(int pos)
 {
     SetState(EDead);
 }

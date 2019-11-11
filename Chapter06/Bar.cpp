@@ -19,6 +19,7 @@ Bar::Bar()
     
     mMeshComp = new MeshComponent(this);
     mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Cube.gpmesh"));
+    SetName("Bar");
 }
 
 void Bar::UpdateActor(float deltaTime)
