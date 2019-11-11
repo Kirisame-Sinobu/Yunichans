@@ -205,7 +205,7 @@ void Game::LoadData()
 {
 	// Create actors
     
-//    new CreateField();
+    new CreateField();
     
     //デバッグ用グリッド
 //    new Grid();

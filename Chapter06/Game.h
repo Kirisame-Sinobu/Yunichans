@@ -55,7 +55,7 @@ private:
 	bool mUpdatingActors;
     
 //    float fieldHeight = 1500.0f;
-    float fieldWidth = 500.0f;
+    float fieldWidth = 1000.0f;
     
     //ブロックの当たり判定に使用
     //ブロックの上に配置している位置
