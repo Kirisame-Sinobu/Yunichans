@@ -18,7 +18,7 @@ Bar::Bar()
     mKey_move = new Key_move(this);
     
     mMeshComp = new MeshComponent(this);
-    mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Cube.gpmesh"));
+    mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Cube2.gpmesh"));
     SetName("Bar");
 }
 
