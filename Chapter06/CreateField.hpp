@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "Actor.h"
+#include "Game.h"
 
 class CreateField : public Actor
 {
@@ -20,6 +21,13 @@ public:
     void CreateSideWall();
     void CreateUpWall();
     
+private:
+//    float mWidthStart = -500.0f * (_gameInstance->GetFieldWidth() / 500.0f );
+//    float mHeightStart = -500.0f * (_gameInstance->GetFieldHeight() / 500.0f) - 1.0f;
+//    int mWidthCount = _gameInstance->GetFieldWidth() / 500;
+//    int mHeightCount = _gameInstance->GetFieldHeight() / 500;
+    float mStart = _gameInstance->GetFieldWidth();
+    int mWallCount = (_gameInstance->GetFieldWidth()) / 500;
     
 };
 

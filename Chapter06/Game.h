@@ -27,7 +27,7 @@ public:
 	void AddActor(class Actor* actor);
 	void RemoveActor(class Actor* actor);
     
-    float GetFieldHeight(){return fieldHeight;}
+//    float GetFieldHeight(){return fieldHeight;}
     float GetFieldWidth(){return fieldWidth;}
 
 	class Renderer* GetRenderer() { return mRenderer; }
@@ -42,6 +42,8 @@ private:
 	std::vector<class Actor*> mActors;
     std::vector<class Actor*> mBalls;
     std::vector<class Actor*> mOther_thing;
+    std::vector<class Actor*> mBlocks;
+    std::vector<class Actor*> mBars;
     
 	// Any pending actors
 	std::vector<class Actor*> mPendingActors;
@@ -53,8 +55,21 @@ private:
 	// Track if we're updating actors right now
 	bool mUpdatingActors;
     
-    float fieldHeight = 1000.0f;
-    float fieldWidth = 1000.0f;
+//    float fieldHeight = 1500.0f;
+    float fieldWidth = 500.0f;
+    
+    //ブロックの当たり判定に使用
+    //ブロックの上に配置している位置
+    const float block_height = 200.0f;
+    const float block_under = 0.0f;
+    
+    //Barの高さ
+    const float bar_under = -300.0f;
+    //ブロックの大きさ
+    const Vector3 block_scale = Vector3(50.0f,50.0f,50.0f);
+    
+    //barの大きさ
+    const Vector3 bar_scale = Vector3(100.0f,100.0f,100.0f);
 
 	// Game-specific code
 	class CameraActor* mCameraActor;

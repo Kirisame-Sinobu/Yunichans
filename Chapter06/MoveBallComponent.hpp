@@ -17,6 +17,8 @@ public:
     MoveBallComponent(class Actor* owner, int updateOrder = 10);
     void Update(float deltaTime) override;
     
+    void Hit_block(int pos);
+    
     float GetAngularSpeed() const { return mAngularSpeed; }
     float GetForwardSpeed() const { return mForwardSpeed; }
     void SetAngularSpeed(float speed) { mAngularSpeed = speed; }

@@ -33,7 +33,7 @@ public:
 	void UpdateComponents(float deltaTime);
 	// Any actor-specific update code (overridable)
 	virtual void UpdateActor(float deltaTime);
-    virtual void Hit_Actor(float deltaTime);
+    virtual void Hit_Actor(int pos);
 
 	// ProcessInput function called from Game (not overridable)
 	void ProcessInput(const uint8_t* keyState);
