@@ -29,10 +29,10 @@ CreateField::CreateField()
     {
         for (int j = 0; j < mWallCount; j++)
         {
-            Wall* wall = new Wall();
-            wall->SetPosition(Vector3(-mStart + i * size + (size/2.0f), -mStart + j * size + (size/2.0f), -mStart));
+//            Wall* wall = new Wall();
+//            wall->SetPosition(Vector3(-mStart + i * size + (size/2.0f), -mStart + j * size + (size/2.0f), -mStart));
             
-            wall = new Wall();
+            Wall* wall = new Wall();
             wall->SetPosition(Vector3(-mStart + i * size + (size/2.0f), -mStart + j * size + (size/2.0f), mStart));
         }
     }

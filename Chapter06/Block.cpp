@@ -22,7 +22,7 @@ Block::Block()
 }
 
 Block::~Block(){
-    Ball* ball = new Ball();
+    Ball* ball = new Ball(GetPosition());
     ball->SetPosition(GetPosition());
     ball->SetScale(3.0f);
 }
