@@ -22,9 +22,9 @@ Block::Block()
 }
 
 Block::~Block(){
-    Ball* ball = new Ball(GetPosition());
-    ball->SetPosition(GetPosition());
-    ball->SetScale(3.0f);
+    Ball* ball = new Ball(Vector3(GetPosition()));
+//    ball->SetPosition(GetPosition());
+//    ball->SetScale(3.0f);
 }
 
 void Block::UpdateActor(float deltaTime)

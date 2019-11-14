@@ -14,7 +14,7 @@ class Block : public Actor
 {
 public:
     Block();
-    ~Block();
+    virtual ~Block();
 
     void UpdateActor(float deltaTime) override;
     void ActorInput(const uint8_t* keyState) override;

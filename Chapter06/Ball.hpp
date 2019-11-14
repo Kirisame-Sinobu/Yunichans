@@ -13,7 +13,7 @@
 class Ball : public Actor
 {
 public:
-    Ball();
+    Ball(const Vector3& pos = Vector3(0,0,0));
 
     void UpdateActor(float deltaTime) override;
     void ActorInput(const uint8_t* keyState) override;
