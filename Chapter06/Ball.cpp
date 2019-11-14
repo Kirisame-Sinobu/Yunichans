@@ -12,9 +12,11 @@
 #include "MoveBallComponent.hpp"
 #include "Game.h"
 
-Ball::Ball()
+Ball::Ball(const Vector3& pos)
     :Actor()
 {
+    SetPosition(pos);
+    SetScale(3.0f);
     mMoveBallComp = new MoveBallComponent(this);
     mMeshComp = new MeshComponent(this);
 //    mMeshComp->SetMesh(_gameInstance -> GetRenderer() ->GetMesh("Assets/Sphere.gpmesh"));

@@ -139,7 +139,7 @@ void Game::UpdateGame()
                     if((temp_ball_pos.y > temp_pos.y - block_scale.y) && (temp_ball_pos.y < temp_pos.y + block_scale.y)){
                         if((temp_ball_pos.y > temp_pos.y - block_scale.y) && (temp_ball_pos.y < temp_pos.y + block_scale.y)){
                             block -> Hit_Actor(0);
-                            ball -> Hit_Actor(0);
+                            ball -> Hit_Actor(1);
 //                            printf("\nbreak_block");
                             break;
                         }
@@ -221,14 +221,16 @@ void Game::LoadData()
 //    new Grid();
     
     //キューブのオブジェクト制作
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 10; j++){
-            Block* block = new Block();
-            block->SetPosition(Vector3(500 - (101.0f * i), 500 - (101.0f * j), block_height));
-            block->SetScale(100.0f);
-            Quaternion q(Vector3::UnitY, -Math::Pi);
-            q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
-            block->SetRotation(q);
+    for(int y = 0; y < 3; y++){
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; j++){
+                Block* block = new Block();
+                block->SetPosition(Vector3(500 - (101.0f * i), 500 - (101.0f * j), block_height + (100 * y)));
+                block->SetScale(100.0f);
+                Quaternion q(Vector3::UnitY, -Math::Pi);
+                q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi));
+                block->SetRotation(q);
+            }
         }
     }
     
